@@ -74,6 +74,7 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 	local BackgroundList4 = Instance.new("TextLabel")
 	local BackgroundList5 = Instance.new("TextLabel")
 	local BackgroundList6 = Instance.new("TextLabel")
+	local BackgroundList7 = Instance.new("TextLabel")
 	local SupportedGlow = Instance.new("Frame")
 	local SupportedFrameGlow1 = Instance.new("ImageLabel")
 	local SupportedFrameGlow2 = Instance.new("ImageLabel")
@@ -286,6 +287,18 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 	BackgroundList6.TextColor3 = Color3.fromRGB(255, 255, 255)
 	BackgroundList6.TextSize = 14.000
 	BackgroundList6.TextTransparency = 1.000
+	
+	BackgroundList7.Name = "BackgroundList7"
+	BackgroundList7.Parent = BackgroundS
+	BackgroundList7.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	BackgroundList7.BackgroundTransparency = 1.000
+	BackgroundList7.Position = UDim2.new(0.0708154514, 0, 0, 0)
+	BackgroundList7.Size = UDim2.new(0, 200, 0, 24)
+	BackgroundList7.Font = Enum.Font.Gotham
+	BackgroundList7.Text = "Clicker Madness"
+	BackgroundList7.TextColor3 = Color3.fromRGB(255, 255, 255)
+	BackgroundList7.TextSize = 14.000
+	BackgroundList7.TextTransparency = 1.000
 
 	SupportedGlow.Name = "SupportedGlow"
 	SupportedGlow.Parent = SupportedFrame
@@ -391,6 +404,13 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 			TweenInfo.new(.55, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
 			{TextTransparency = 0}
 		):Play()
+		
+		TweenService:Create(
+			SupportedFrame.BackgroundS.BackgroundList7,
+			TweenInfo.new(.55, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+			{TextTransparency = 0}
+		):Play()
+		
 		TweenService:Create(
 			SupportedFrame.SupportedGlow.SupportedFrameGlow1,
 			TweenInfo.new(.55, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
@@ -466,6 +486,9 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 				TweenInfo.new(.55, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
 				{BackgroundTransparency = 1}
 			):Play()
+			
+			---------------------------------
+			
 			TweenService:Create(
 				SupportedFrame.BackgroundS.BackgroundList1,
 				TweenInfo.new(.55, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
@@ -496,6 +519,14 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 				TweenInfo.new(.55, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
 				{TextTransparency = 1}
 			):Play()
+			TweenService:Create(
+				SupportedFrame.BackgroundS.BackgroundList6,
+				TweenInfo.new(.55, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+				{TextTransparency = 0}
+			):Play()
+			
+			---------------------------------
+			
 			TweenService:Create(
 				SupportedFrame.SupportedGlow.SupportedFrameGlow1,
 				TweenInfo.new(.55, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
