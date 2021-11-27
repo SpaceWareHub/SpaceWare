@@ -405,12 +405,6 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 			{TextTransparency = 0}
 		):Play()
 		TweenService:Create(
-			SupportedFrame.BackgroundS.BackgroundList6,
-			TweenInfo.new(.55, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-			{TextTransparency = 0}
-		):Play()
-		
-		TweenService:Create(
 			SupportedFrame.BackgroundS.BackgroundList7,
 			TweenInfo.new(.55, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
 			{TextTransparency = 0}
