@@ -399,6 +399,11 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 			TweenInfo.new(.55, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
 			{TextTransparency = 0}
 		):Play()
+			TweenService:Create(
+			SupportedFrame.BackgroundS.BackgroundList6,
+			TweenInfo.new(.55, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+			{TextTransparency = 0}
+		):Play()
 		TweenService:Create(
 			SupportedFrame.BackgroundS.BackgroundList6,
 			TweenInfo.new(.55, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
@@ -520,9 +525,9 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 				{TextTransparency = 1}
 			):Play()
 			TweenService:Create(
-				SupportedFrame.BackgroundS.BackgroundList6,
+				SupportedFrame.BackgroundS.BackgroundList7,
 				TweenInfo.new(.55, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-				{TextTransparency = 0}
+				{TextTransparency = 1}
 			):Play()
 			
 			---------------------------------
