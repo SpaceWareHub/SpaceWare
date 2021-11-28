@@ -1152,8 +1152,7 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 						TweenInfo.new(.35, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
 						{Size = UDim2.new(0, 0,0, 263)}
 					):Play()
-					wait(.35)
-					v.Visible = false
+					v.ScrollBarThickness = 0
 				end 
 			end
 			for i, v in next, AllTabs:GetChildren() do
@@ -1175,6 +1174,7 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 				TweenInfo.new(.35, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
 				{Size = UDim2.new(0, 393,0, 263)}
 			):Play()
+			NewPages.ScrollBarThickness = 2
 			NewPages.Visible = true
 		end)
 
@@ -1220,7 +1220,7 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 		NewPages.BorderSizePixel = 0
 		NewPages.Size = UDim2.new(0, 0,0, 263)
 		NewPages.Position = UDim2.new(-0.004, 0,0.01, 0)
-		NewPages.ScrollBarThickness = 2
+		NewPages.ScrollBarThickness = 0
 		NewPages.ScrollBarImageTransparency = 0
 		NewPages.AutomaticCanvasSize = Enum.AutomaticSize.Y
 		NewPages.CanvasSize = UDim2.new(0, 0, 1, 0)
