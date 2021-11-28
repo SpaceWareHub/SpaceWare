@@ -145,7 +145,7 @@ chatFrame.ChatBarParentFrame.Position = chatFrame.ChatChannelParentFrame.Positio
     end
 
     local Lib = loadstring(game:HttpGet"https://raw.githubusercontent.com/SpaceWareHub/SpaceWare/main/SpaceWareLib")()
-    local Window = Lib:Window("SpaceWare", "Da Hood", Enum.KeyCode.RightControl)
+    local Window = Lib:Window("Lunar Client", "Da Hood", Enum.KeyCode.RightControl)
     local Main = Window:Tab('Player')
     local Aimlock = Window:Tab("Aimlock")
     local Silent = Window:Tab("Silent Aim")
@@ -1358,7 +1358,7 @@ elseif game.PlaceId == 5602055394 then
             end
         end
         local Lib = loadstring(game:HttpGet"https://raw.githubusercontent.com/SpaceWareHub/SpaceWare/main/SpaceWareLib")()
-        local Window = Lib:Window("SpaceWare", "Hood Modded", Enum.KeyCode.RightControl)
+        local Window = Lib:Window("Lunar Client", "Hood Modded", Enum.KeyCode.RightControl)
         local Main = Window:Tab('Player')
         local Aimlock = Window:Tab("Aimlock")
         local Silent = Window:Tab("Silent Aim")
@@ -1696,7 +1696,7 @@ if game.PlaceId == 1962086868 then
     getsenv(y).kick()
     
     local Coastified = loadstring(game:HttpGet"https://raw.githubusercontent.com/SpaceWareHub/SpaceWare/main/SpaceWareLib")()
-    local win = Coastified:Window("SpaceWare", "Tower Of Hell", Enum.KeyCode.RightControl)
+    local win = Coastified:Window("Lunar Client", "Tower Of Hell", Enum.KeyCode.RightControl)
     local MainWindow = win:Tab("Main")
     local MainWindow2 = win:Tab("Mutators")
     TimeAlive = 0
@@ -1958,7 +1958,7 @@ if setreadonly then setreadonly(mt, false) else make_writeable(mt, true) end
 
 
 local lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/SpaceWareHub/SpaceWare/main/SpaceWareLib"))()
-main = lib:Window("SpaceWare", "Strucid", Enum.KeyCode.RightControl)
+main = lib:Window("Lunar Client", "Strucid", Enum.KeyCode.RightControl)
 Aimbot = main:Tab('Aimbot')
 LPTab = main:Tab('LocalPlayer')
 Esp = main:Tab('Visuals')
@@ -2789,7 +2789,7 @@ if game.PlaceId == 142823291 then
     end
     
     local lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/SpaceWareHub/SpaceWare/main/SpaceWareLib"))()
-    main = lib:Window("SpaceWare", "Murder Mystery 2", Enum.KeyCode.RightControl)
+    main = lib:Window("Lunar Client", "Murder Mystery 2", Enum.KeyCode.RightControl)
     Mainz = main:Tab('Combat')
     Character = main:Tab('Character')
     Visual = main:Tab('Visuals')
@@ -3211,7 +3211,7 @@ elseif game.PlaceId == 2551991523 then
         getsenv(GetScript()).gui.Data.Money.Text = getsenv(GetScript()).Comma(getsenv(GetScript()).pstats.money)
     end
     local lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/SpaceWareHub/SpaceWare/main/SpaceWareLib",true))()
-    main = lib:Window("SpaceWare", "Broken Bones IV", Enum.KeyCode.RightControl)
+    main = lib:Window("Lunar Client", "Broken Bones IV", Enum.KeyCode.RightControl)
     MainWindow = main:Tab('Cash')
     MainWindow:Button('Give 10k Cash',function()
         GiveMoney(10000)
@@ -3246,7 +3246,7 @@ if game.PlaceId == 370731277 then
 --Made by nameless#3675
 
 local lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/SpaceWareHub/SpaceWare/main/SpaceWareLib"))()
-main = lib:Window("SpaceWare", "Meepcity", Enum.KeyCode.RightControl)
+main = lib:Window("Lunar Client", "Meepcity", Enum.KeyCode.RightControl)
 local Farming_Tab = main:Tab('Farming')
 Client = {
 	Toggles = {
@@ -3309,7 +3309,7 @@ getgenv().AutoSuperUpgradesPetSlots = false;
 
 -- Lib
 local DarkLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/SpaceWareHub/SpaceWare/main/SpaceWareLib"))()
-local s = DarkLib:Window("SpaceWare", "Clicker Madness", Enum.KeyCode.RightControl)
+local s = DarkLib:Window("Lunar Client", "Clicker Madness", Enum.KeyCode.RightControl)
 -- Auto Farm Clicks Toggle
 local ss = s:Tab("Farming")
 ss:Label("Farming Settings:")
