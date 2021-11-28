@@ -1,3 +1,11 @@
+if game.CoreGui:FindFirstChild("Library") then
+    return game.StarterGui:SetCore("SendNotification", {
+      Title = "ALREADY EXECUTED",
+      Text = "DONT SPAM EXECUTE",
+      Duration = 1
+    })
+  end
+
 if game.PlaceId == 2788229376 then
     enabled = true --chat "/spy" to toggle!
 spyOnMyself = true --if true will check your messages too
@@ -135,16 +143,31 @@ chatFrame.ChatBarParentFrame.Position = chatFrame.ChatChannelParentFrame.Positio
             fireclickdetector(game:GetService("Workspace").Ignored["Clean the shoes on the floor and come to me for cash"].ClickDetector)
         end
     end
+
     local Lib = loadstring(game:HttpGet"https://raw.githubusercontent.com/SpaceWareHub/SpaceWare/main/SpaceWareLib")()
     local Window = Lib:Window("SpaceWare", "Da Hood", Enum.KeyCode.RightControl)
     local Main = Window:Tab('Player')
     local Aimlock = Window:Tab("Aimlock")
     local Silent = Window:Tab("Silent Aim")
-    local Animation = Window:Tab("Animation")
     local ESP = Window:Tab("ESP")
+    local Autobuy = Window:Tab("AutoBuy")
+    local Animation = Window:Tab("Animation")
     local Tps = Window:Tab('Teleports')
     local Farming = Window:Tab('Autofarm')
     local Scripts = Window:Tab("Scripts")
+
+    for _, v in pairs(workspace.Ignored.Shop:GetChildren()) do
+        Autobuy:Button(v.Name, function()
+            local d = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+            local k = game.Workspace.Ignored.Shop[v.Name]
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = k.Head.CFrame + Vector3.new(0, 3, 0)
+            if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - k.Head.Position).Magnitude <= 50 then
+                wait(.2)
+                fireclickdetector(k:FindFirstChild("ClickDetector"), 4)
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(d)
+            end
+        end)
+    end
 
     Animation:Button("TryHard - Pro Animation", function()
         local Animate = game.Players.LocalPlayer.Character.Animate
@@ -240,6 +263,7 @@ chatFrame.ChatBarParentFrame.Position = chatFrame.ChatChannelParentFrame.Positio
         Settings.Fov = Number
         Circle.Radius = Number
     end)
+    
 
     Farming:Toggle('AutoFarm',function(state)
         Client.Toggles.AutoFarm = state
@@ -251,7 +275,257 @@ chatFrame.ChatBarParentFrame.Position = chatFrame.ChatChannelParentFrame.Positio
         Client.Toggles.CashDropRegFarm = state
     end)
 
-    Main:Button("Fly - [X]", function()
+ 
+FLYMODE = 'Default'
+FLYSPEED = 20
+Main:Button("Fly  [X]", function()
+	if FLYMODE == 'Default' then
+		local plr = game.Players.LocalPlayer
+		local Humanoid = plr.Character:FindFirstChildWhichIsA('Humanoid')
+		local mouse = plr:GetMouse()
+		localplayer = plr
+		if workspace:FindFirstChild("Core") then
+			workspace.Core:Destroy()
+		end
+		local Core = Instance.new("Part")
+		Core.Name = "Core"
+		Core.Size = Vector3.new(0.05, 0.05, 0.05)
+		spawn(function()
+			Core.Parent = workspace
+			local Weld = Instance.new("Weld", Core)
+			Weld.Part0 = Core
+			Weld.Part1 = localplayer.Character.LowerTorso
+			Weld.C0 = CFrame.new(0, 0, 0)
+		end)
+		workspace:WaitForChild("Core")
+		local torso = workspace.Core
+		flying = true
+		local speed=FLYSPEED
+		local keys={a=false,d=false,w=false,s=false}
+		local e1
+		local e2
+		local function start()
+			local pos = Instance.new("BodyPosition",torso)
+			local gyro = Instance.new("BodyGyro",torso)
+			pos.Name="EPIXPOS"
+			pos.maxForce = Vector3.new(math.huge, math.huge, math.huge)
+			pos.position = torso.Position
+			gyro.maxTorque = Vector3.new(15e15, 15e15, 15e15)
+			gyro.cframe = torso.CFrame
+			repeat
+				wait()
+				Humanoid.PlatformStand=true
+				local new=gyro.cframe - gyro.cframe.p + pos.position
+				if not keys.w and not keys.s and not keys.a and not keys.d then
+					speed=FLYSPEED
+				end
+				if keys.w then
+					new = new + workspace.CurrentCamera.CoordinateFrame.lookVector * speed
+					speed=speed
+				end
+				if keys.s then
+					new = new - workspace.CurrentCamera.CoordinateFrame.lookVector * speed
+					speed=speed
+				end
+				if keys.d then
+					new = new * CFrame.new(speed,0,0)
+					speed=speed
+				end
+				if keys.a then
+					new = new * CFrame.new(-speed,0,0)
+					speed=speed
+				end
+				if speed>FLYSPEED then
+					speed=FLYSPEED
+				end
+				pos.position=new.p
+				if keys.w then
+					gyro.cframe = workspace.CurrentCamera.CoordinateFrame*CFrame.Angles(-math.rad(speed),0,0)
+				elseif keys.s then
+					gyro.cframe = workspace.CurrentCamera.CoordinateFrame*CFrame.Angles(math.rad(speed),0,0)
+				else
+					gyro.cframe = workspace.CurrentCamera.CoordinateFrame
+				end
+			until flying == false
+			if gyro then gyro:Destroy() end
+			if pos then pos:Destroy() end
+			flying=false
+			Humanoid.PlatformStand=false
+			speed=FLYSPEED
+		end
+		e1=mouse.KeyDown:connect(function(key)
+			if not torso or not torso.Parent then flying=false e1:disconnect() e2:disconnect() return end
+			if key=="w" then
+				keys.w=true
+			elseif key=="s" then
+				keys.s=true
+			elseif key=="a" then
+				keys.a=true
+			elseif key=="d" then
+				keys.d=true
+			elseif key=="x" then
+				if flying==true then
+					flying=false
+				else
+					flying=true
+					start()
+				end
+			end
+		end)
+		e2=mouse.KeyUp:connect(function(key)
+			if key=="w" then
+				keys.w=false
+			elseif key=="s" then
+				keys.s=false
+			elseif key=="a" then
+				keys.a=false
+			elseif key=="d" then
+				keys.d=false
+			end
+		end)
+		start()
+	else
+		repeat wait() until game.Players.LocalPlayer and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:findFirstChild("Head") and game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Humanoid")
+		local mouse = game.Players.LocalPlayer:GetMouse()
+		repeat wait() until mouse
+		local plr = game.Players.LocalPlayer
+		local torso = plr.Character.Head
+		local flying = false
+		local deb = true
+		local ctrl = {f = 0, b = 0, l = 0, r = 0}
+		local lastctrl = {f = 0, b = 0, l = 0, r = 0}
+		local maxspeed = 5000
+		local speed = 5000
+		function Fly()
+			local bg = Instance.new("BodyGyro", torso)
+			bg.P = 9e4
+			bg.maxTorque = Vector3.new(9e9, 9e9, 9e9)
+			bg.cframe = torso.CFrame
+			local bv = Instance.new("BodyVelocity", torso)
+			bv.velocity = Vector3.new(0,0.1,0)
+			bv.maxForce = Vector3.new(9e9, 9e9, 9e9)
+			repeat wait()
+				plr.Character:FindFirstChildWhichIsA('Humanoid').PlatformStand = true
+				if ctrl.l + ctrl.r ~= 100000 or ctrl.f + ctrl.b ~= 10000 then
+					speed = speed+.0+(speed/maxspeed)
+					if speed > maxspeed then
+						speed = maxspeed
+					end
+				elseif not (ctrl.l + ctrl.r ~= 5 or ctrl.f + ctrl.b ~= 5) and speed ~= 5 then
+					speed = speed-5
+					if speed > 5 then
+						speed = -2
+					end
+				end
+				if (ctrl.l + ctrl.r) ~= 5 or (ctrl.f + ctrl.b) ~= 5 then
+					bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (ctrl.f+ctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(ctrl.l+ctrl.r,(ctrl.f+ctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed
+					lastctrl = {f = ctrl.f, b = ctrl.b, l = ctrl.l, r = ctrl.r}
+				elseif (ctrl.l + ctrl.r) == 5 and (ctrl.f + ctrl.b) == 5 and speed ~= 5 then
+					bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (lastctrl.f+lastctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(lastctrl.l+lastctrl.r,(lastctrl.f+lastctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed
+				else
+					bv.velocity = Vector3.new(0,0.1,0)
+				end
+				bg.cframe = game.Workspace.CurrentCamera.CoordinateFrame * CFrame.Angles(-math.rad((ctrl.f+ctrl.b)*50*speed/maxspeed),0,0)
+			until not flying
+			ctrl = {f = 0, b = 0, l = 0, r = 0}
+			lastctrl = {f = 0, b = 0, l = 0, r = 0}
+			speed = 5
+			bg:Destroy()
+			bv:Destroy()
+			plr.Character:FindFirstChildWhichIsA('Humanoid').PlatformStand = false
+		end
+		mouse.KeyDown:connect(function(key)
+			if key:lower() == "x" then
+				if flying then flying = false
+				else
+					flying = true
+					Fly()
+				end
+			elseif key:lower() == "w" then
+				ctrl.f = FLYSPEED
+			elseif key:lower() == "s" then
+				ctrl.b = -FLYSPEED
+			elseif key:lower() == "a" then
+				ctrl.l = -FLYSPEED
+			elseif key:lower() == "d" then
+				ctrl.r = FLYSPEED
+			end
+		end)
+		mouse.KeyUp:connect(function(key)
+			if key:lower() == "w" then
+				ctrl.f = 0
+			elseif key:lower() == "s" then
+				ctrl.b = 0
+			elseif key:lower() == "a" then
+				ctrl.l = 0
+			elseif key:lower() == "d" then
+				ctrl.r = 0
+			end
+		end)
+		Fly()
+	end
+end)
+Main:Button("Fly Type", function()
+    	if FLYMODE == 'Default' then
+		FLYMODE = 'IY'
+	game.StarterGui:SetCore("SendNotification", {
+	Title = "Fly Type",
+	Text = 'IY / Reset To Change.',
+	Duration = 1,
+    })
+	else
+		FLYMODE = 'Default'
+        game.StarterGui:SetCore("SendNotification", {
+            Title = "Fly Type",
+            Text = 'Default / Reset To Change.',
+            Duration = 1,
+        })
+	end
+end)
+
+Main:Slider('Fly Speed',20,60,0,function(num)
+	FLYSPEED = num
+end)
+
+Main:Line()
+
+    Main:Slider("Field Of View - Better View", 70, 140,0,function(t)
+        game.Workspace.Camera.FieldOfView = t
+    end)
+    
+    Main:Slider("Zoom Max Distance", 30, 10000,0,function(t)
+        game:GetService("Players").LocalPlayer.CameraMaxZoomDistance = t
+    end)
+
+    Main:Line()
+
+    Main:Button("Anti Stomp", function()
+        pcall(
+            function()
+                if tostring(game.PlaceId) == "2788229376" then
+                    local corepackages = game:GetService "CorePackages"
+                    local localplayer = game:GetService "Players".LocalPlayer
+                    local run = game:GetService "RunService"
+                    run:BindToRenderStep(
+                        "rrrrrrrrrrr",
+                        2000,
+                        function()
+                            pcall(
+                                function()
+            if localplayer.Character.Humanoid.Health <= 5 then
+            for i, v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+                if v:IsA("BasePart") then
+                    v:Destroy()
+                end
+            end
+    end
+    end)
+    end)
+    end
+    end)
+    end)
+
+    Main:Button("SuperHuman [Z]", function()
         loadstring(game:HttpGet(('https://pastebin.com/raw/wtq5bc0t'),true))()
     end)
 
@@ -289,13 +563,172 @@ chatFrame.ChatBarParentFrame.Position = chatFrame.ChatChannelParentFrame.Positio
         end
     end)
 
-    Main:Slider("Field Of View - Better View", 70, 120,0,function(t)
-        game.Workspace.Camera.FieldOfView = t
-    end)
+ Main:Button("Auto Stomp [C]", function()
+        autostomp = false
+        game:GetService("RunService").Stepped:connect(function()
+            if autostomp then
+                game.ReplicatedStorage.MainEvent:FireServer("Stomp")
+            end
+        end)
+        plr = game.Players.LocalPlayer
+        mouse = plr:GetMouse()
+        mouse.KeyDown:connect(function(key)
+            if key == "h" then
+                autostomp = not autostomp
+                game.ReplicatedStorage.MainEvent:FireServer("Stomp")
+            end
+        end)
+end)
     
-    Main:Slider("Zoom Max Distance", 30, 10000,0,function(t)
-        game:GetService("Players").LocalPlayer.CameraMaxZoomDistance = t
-    end)
+ Main:Button("Freefist [T]", function()
+    local player = game.Players.LocalPlayer
+    local localPlayer       = game:GetService("Players").LocalPlayer;
+    local localCharacter    = localPlayer.Character
+    local Mouse             = localPlayer:GetMouse();
+    local FistControl       = false
+    local LeftFist          = localCharacter.LeftHand;
+    local RightFist         = localCharacter.RightHand;
+
+
+for i,v in next, workspace:GetDescendants() do
+    if v:IsA'Seat' then
+        v:Destroy()
+    end
+end
+pcall(function()
+    player.Character.LeftHand.LeftWrist:Destroy();
+    player.Character.RightHand.RightWrist:Destroy();
+end);
+local loopFunction = function()
+    player.Character.LeftHand.CFrame  = CFrame.new(Mouse.Hit.p);
+    player.Character.RightHand.CFrame = CFrame.new(Mouse.Hit.p);
+end;        
+local Loop
+local Start = function()
+    Loop = game:GetService("RunService").Heartbeat:Connect(loopFunction);
+end;         
+local Pause = function()
+    Loop:Disconnect()
+end;
+    Mouse.KeyDown:connect(function(key)
+        if key == "t" then
+        if FistControl == false then
+            FistControl = true;
+            Start();
+        elseif FistControl == true then
+            FistControl = false;
+            Pause();
+            player.Character.LeftHand.CFrame  = player.Character.LeftLowerArm.CFrame
+            player.Character.RightHand.CFrame = player.Character.RightLowerArm.CFrame
+        end;
+    end;
+end)
+end)
+
+Main:Button("Force Reset", function()
+    for i, v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+        if v:IsA("BasePart") then
+            v:Destroy()
+        end
+    end
+end)
+
+
+Main:Button("Anonymous", function()
+	pcall(function()
+		game.Players.LocalPlayer.Character.Shirt:Destroy()
+		game.Players.LocalPlayer.Character.RightUpperLeg:Destroy()
+		game.Players.LocalPlayer.Character.Humanoid.HealthDisplayDistance = math.huge
+		game.Players.LocalPlayer.Character.Humanoid.NameDisplayDistance = math.huge
+		game.Players.LocalPlayer.Character.RightUpperLeg.Size = Vector3.new(0,0,0)
+		game.Players.LocalPlayer.Character.RightUpperLeg.Massless = true
+		game.Players.LocalPlayer.Character.RightUpperLeg.CanCollide = false
+
+		asdasd = true
+
+		while asdasd == true do 
+			pcall(function()  
+				game.Players.LocalPlayer.Character.RightUpperLeg.RightHipRigAttachment.CFrame =  CFrame.new(0, 100000.4736328125, 0)
+				game.Players.LocalPlayer.Character.RightUpperLeg.CFrame = CFrame.new(0, 100000.4736328125, 0)
+			end)
+			wait()
+		end
+	end)
+	wait(0.10)
+	pcall(function()
+		game.Players.LocalPlayer.Character.LeftUpperLeg:Destroy()
+		game.Players.LocalPlayer.Character.Pants:Destroy()
+		game.Players.LocalPlayer.Character.Humanoid.HealthDisplayDistance = math.huge
+		game.Players.LocalPlayer.Character.Humanoid.NameDisplayDistance = math.huge
+		game.Players.LocalPlayer.Character.LeftUpperLeg.Size = Vector3.new(0,0,0)
+		game.Players.LocalPlayer.Character.LeftUpperLeg.Massless = true
+		game.Players.LocalPlayer.Character.LeftUpperLeg.CanCollide = false
+
+		asdasd = true
+
+		while asdasd == true do 
+			pcall(function()  
+				game.Players.LocalPlayer.Character.LeftUpperLeg.LeftHipRigAttachment.CFrame =  CFrame.new(0, 100000.4736328125, 0)
+				game.Players.LocalPlayer.Character.LeftUpperLeg.CFrame = CFrame.new(0, 100000.4736328125, 0)
+			end)
+			wait()
+		end
+	end)
+	wait(0.10)
+	pcall(function()
+		game.Players.LocalPlayer.Character.Head.Neck:Destroy()
+		game.Players.LocalPlayer.Character.UpperTorso.NeckAttachment:Destroy()
+		game.Players.LocalPlayer.Character.Humanoid.HealthDisplayDistance = math.huge
+		game.Players.LocalPlayer.Character.Humanoid.NameDisplayDistance = math.huge
+		game.Players.LocalPlayer.Character.Head.Size = Vector3.new(0,0,0)
+		game.Players.LocalPlayer.Character.Head.Massless = true
+		game.Players.LocalPlayer.Character.Head.CanCollide = false
+
+		asdasd = true
+
+		while asdasd == true do 
+			pcall(function()  
+				game.Players.LocalPlayer.Character.Head.NeckRigAttachment.CFrame =  CFrame.new(0, 100000.4736328125, 0)
+				game.Players.LocalPlayer.Character.UpperTorso.NeckRigAttachment.CFrame =  CFrame.new(0, 100000.4736328125, 0)
+				game.Players.LocalPlayer.Character.Head.CFrame = CFrame.new(0, 100000.4736328125, 0)
+			end)
+			wait()
+		end
+	end)
+end)
+
+Main:Toggle("Reach", false, function(bool)
+    local player = game.Players.LocalPlayer
+        fistreac = false
+    if bool then
+            fistreac = true
+            while fistreac == true do
+                    wait()
+                    local success, err = pcall(function()
+                        if player.Character.BodyEffects.Attacking.Value == true then
+                            for i,v in pairs(game:GetService('Players'):GetChildren()) do
+                                if (v.Character.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.LeftHand.Position).Magnitude <= 50 then
+                                    if game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") then
+                                        if game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool"):FindFirstChild('Handle') then
+                                            firetouchinterest(game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool").Handle, v.Character.UpperTorso, 0)
+                                        else
+                                            firetouchinterest(game.Players.LocalPlayer.Character['RightHand'], v.Character.UpperTorso, 0)
+                                            firetouchinterest(game.Players.LocalPlayer.Character['LeftHand'], v.Character.UpperTorso, 0)
+                                            firetouchinterest(game.Players.LocalPlayer.Character['RightFoot'], v.Character.UpperTorso, 0)
+                                            firetouchinterest(game.Players.LocalPlayer.Character['LeftFoot'], v.Character.UpperTorso, 0)
+                                            firetouchinterest(game.Players.LocalPlayer.Character['RightLowerLeg'], v.Character.UpperTorso, 0)
+                                            firetouchinterest(game.Players.LocalPlayer.Character['LeftLowerLeg'], v.Character.UpperTorso, 0)
+                                        end
+                                    end
+                                end
+                            end
+                        end
+                    end)
+            end
+    else
+        fistreac = false
+    end
+end)
 
     game.Players.LocalPlayer.Character.Humanoid:GetPropertyChangedSignal("WalkSpeed"):Connect(function()
         if game.Players.LocalPlayer.Character:FindFirstChild('Animate') then
@@ -337,56 +770,255 @@ chatFrame.ChatBarParentFrame.Position = chatFrame.ChatChannelParentFrame.Positio
         Settings.Names = Bool
     end)
 
-    Tps:Button("Bank", function()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-437.125885, 38.9783096, -285.587372, 0.0165725481, 5.29857829e-08, -0.999862671, 1.16139693e-08, 1, 5.31855591e-08, 0.999862671, -1.24937944e-08, 0.0165725481)
-    end)
-    Tps:Button("Police Station", function()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-244.594635, 21.7999573, -114.703079, 0.000778150337, 4.10936245e-08, 0.999999702, -1.35063134e-08, 1, -4.10831262e-08, -0.999999702, -1.34743408e-08, 0.000778150337)
-    end)
-    Tps:Button("Tyrone Store 1 | Gun Store 2", function()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-582.145508, 8.31478119, -736.036865, -0.0186449531, 0, -0.999825835, 0, 1, 0, 0.999825835, 0, -0.0186449531)
-    end)
-    Tps:Button("Tyrone Store 2 | Gun Store 2", function()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(481.720551, 48.0705032, -626.868408, -0.999989808, -7.24530835e-08, -0.00451118173, -7.23403772e-08, 1, -2.51467505e-08, 0.00451118173, -2.4820153e-08, -0.999989808)
-    end)
-    Tps:Button("Admin Base", function()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-729.89502, -39.6542168, -885.799988, -0.00390857551, 0, 0.999992371, 0, 1, 0, -0.999992371, 0, -0.00390857551)
-    end)
-    
-    Tps:Button("Sewers", function()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(112.622002, -26.2119999, -277.321014, 1, 0, 0, 0, 1, 0, 0, 0, 1)
-    end)
-    Tps:Button("Shoe Store", function()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-247.313629, 21.8458023, -410.301788, 0.0516406372, -8.94479726e-08, -0.99866575, 7.43455573e-08, 1, -8.57230944e-08, 0.99866575, -6.98195635e-08, 0.0516406372)
-    end)
-    Tps:Button("Boxing Place", function()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-236.005997, 22.0594845, -1120.53101, -0.0342936739, 0, -0.999412, 0, 1, 0, 0.999412, 0, -0.0342936739)
-    end)
-    Tps:Button("Hospital", function()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(86.5179977, 21.7549992, -481.679993, 1, 0, 0, 0, 1, 0, 0, 0, 1)
-    end)
-    Tps:Button("Phone Store", function()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-120.121002, 22.9459991, -870.424988, 1, 0, 0, 0, 1, 0, 0, 0, 1)
-    end)
-    
-    Tps:Button("Taco Shack", function()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(584.5401, 51.061409, -479.443848, 1, 0, 0, 0, 1, 0, 0, 0, 1)
-    end)
-    Tps:Button("Casino", function()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-865.623718, 21.75, -154.159851, -0.999520898, 1.32232083e-08, 0.0309504624, 1.11388374e-08, 1, -6.75178029e-08, -0.0309504624, -6.71407108e-08, -0.999520898)
-    end)
-    Tps:Button("UFO", function()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(71.5650024, 142.925995, -690.330017, 1, 0, 0, 0, 1, 0, 0, 0, 1)
-    end)
-    Tps:Button("Fire Station", function()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-165.355591, 35.0142746, -105.90815, 0.999979854, -1.32250246e-08, -0.00631061243, 1.34069795e-08, 1, 2.87907422e-08, 0.00631061243, -2.88747746e-08, 0.999979854)
-    end)
-    Tps:Button("Church", function()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(205.684769, 23.755003, -66.5461655, -0.999897838, 0, -0.0142883975, 0, 1, 0, 0.0142883975, 0, -0.999897838)
-    end)
-    Tps:Button("Klips", function()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(13.4705801, 21.75, -117.35498)
-    end)
+    Tps:Button("AdminBase", function()
+        game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-729.89501953125, -39.654216766357, -885.79998779297)
+        end)
+        
+        
+        Tps:Button("AdminGuns #1", function()
+            game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-872.63488769531, -32.649208068848, -532.40045166016)
+        end)
+        
+        Tps:Button("AdminGuns #2", function()
+            game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-810.33892822266, -39.649211883545, -933.86071777344)
+        end)
+        
+        Tps:Button("AdminHangout", function()
+        game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1009.374, -53.154, -1014.02)
+        end)
+        
+        Tps:Button("AdminJail", function()
+        game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-799.534, -40.649, -839.368)
+        end)
+        
+        Tps:Button("Bank", function()
+        game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-485.668, 23.631, -285.169)
+        end)
+        
+        Tps:Button("Bank Roof", function()
+        game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-468.723, 38.031, -286.021)
+        end)
+        
+        Tps:Button("Basketball Court", function()
+        game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-932.195, 21.1, -481.737)
+        end)
+        
+        Tps:Button("Boxing", function()
+        game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-236.006, 23.151, -1120.531)
+        end)
+        
+        Tps:Button("Casino", function()
+        game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-905, 19.25, -142.75)
+        end)
+        
+        Tps:Button("Cemetery", function()
+            game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(190.56588745117, 21.749992370605, 27.322988510132)
+        end)
+        
+        Tps:Button("Church", function()
+        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(205.77447509766, 23.7799949646, -59.920375823975)
+        end)
+        
+        Tps:Button("Club", function()
+            game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-262.34463500977, 23.522811889648, -499.6611328125)
+        end)
+        
+        Tps:Button("DH Fitness", function()
+            game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-75.794998168945, 22.700284957886, -633.71997070313)
+        end)
+            
+        Tps:Button("DH Kicks", function()
+            game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-205.59103393555, 21.845796585083, -409.92074584961)
+        end)
+            
+        Tps:Button("DH Klips", function()
+            game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(7.0170149803162, 21.749996185303, -105.73072814941)
+        end)
+            
+        
+        Tps:Button("Fire Station", function()
+        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-129.52, 26.812, -114.456)
+        end)
+        
+        Tps:Button("Flower Shop", function()
+        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-71.061767578125, 23.144777297974, -323.15124511719)
+        end)
+        
+        Tps:Button("Food Shack #1", function()
+            game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-342.74331665039, 23.680646896362, -297.6901550293)
+        end)
+        
+        Tps:Button("Food Shack #2", function()
+            game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(298.42929077148, 49.280658721924, -610.31072998047)
+        end)
+        
+        
+        Tps:Button("Furniture #1", function()
+        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-490.37777709961, 21.849847793579, -108.88053131104)
+        end)
+        
+        Tps:Button("Furniture #2", function()
+        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-624.314453125, 23.245740890503, -260.44833374023)
+        end)
+        
+        Tps:Button("Gas Station", function()
+        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(595.377, 49.000, -264.222)
+        end)
+        
+        Tps:Button("GreenScreen Area", function()
+        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-506.33642578125, 48.602363586426, -213.86831665039)
+        end)
+        
+        Tps:Button("Gunshop #1", function()
+        game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-582, 8.3147783279419, -739.01501464844)
+        end)
+        
+        Tps:Button("Gunshop #2", function()
+        game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(481.6549987793, 48.070491790771, -622.24700927734)
+        end)
+        
+        Tps:Button("High School", function()
+        game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-531.16064453125, 21.874992370605, 269.4602355957)
+        end)
+        
+        Tps:Button("Hospital", function()
+        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(98.829124450684, 22.799991607666, -485.57116699219)
+        end)
+        
+        Tps:Button("Jail Area #1", function()
+        game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-294.16198730469, 21.799936294556, -111.71600341797)
+        end)
+        
+        Tps:Button("Jail Area #2", function()
+            game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-294.09582519531, 21.797946929932, -69.033515930176)
+        end)
+        
+        Tps:Button("Jail Area #3", function()
+            game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-331.52569580078, 21.74800491333, -91.514602661133)
+        end)
+        
+        
+        Tps:Button("Mobile Home", function()
+            game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-951.15283203125, -1.2344611883163, 467.71234130859)
+        end)
+        
+        
+        Tps:Button("Movies", function()
+            game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1005.7873535156, 25.100023269653, -133.55313110352)
+        end)
+        
+        Tps:Button("Phone Store", function()
+            game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-120.12100219727, 21.901559829712, -870.42498779297)
+        end)
+        
+        Tps:Button("Playground", function()
+            game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-247.33399963379, 22.149866104126, -756.50299072266)
+        end)
+        
+        
+        Tps:Button("Police Station", function()
+            game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-267.78082275391, 21.799951553345, -113.97263336182)
+        end)
+        
+        
+        Tps:Button("Sewers", function()
+            game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(112.62200164795, -26.750036239624, -277.3210144043)
+        end)
+        
+        Tps:Button("Sewer Station", function()
+            game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-423.14276123047, -21.000005722046, 65.835586547852)
+        end)
+        
+        Tps:Button("Skate Park", function()
+            game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-791.34893798828, 21.99981880188, -501.31112670898)
+        end)
+        
+        Tps:Button("Taco Shop", function()
+            game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(551.8681640625, 51.06139755249, -494.22760009766)
+        end)
+        
+        Tps:Button("Train Station", function()
+            game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(612.94427490234, 47.999992370605, -106.67445373535)
+        end)
+        
+        Tps:Button("UFO Spot", function()
+            game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(71.565002441406, 138.99995422363, -690.33001708984)
+        end)
+        
+        
+        Tps:Label("Extra Waypoints:")
+        
+        Tps:Button("Building Near Bank #1 N", function()
+            game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-322.31817626953, 80.214508056641, -271.78900146484)
+        end)
+        
+        Tps:Button("Building Near Bank #2 E", function()
+            game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-440.64288330078, 80.475311279297, -220.69586181641)
+        end)
+        Tps:Button("Empty Pool", function()
+            game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-845.99987792969, 21.800006866455, -280.29000854492)
+        end)
+            
+        Tps:Button("Playground Food Shack", function()
+            game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-278.38232421875, 22.649866104126, -804.705078125)
+        end)
+            
+        Tps:Button("Police Station Area #2", function()
+            game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-245.13682556152, 21.799953460693, -91.411743164063)
+        end)
+            
+        Tps:Button("Police Station Area #3", function()
+            game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-264.81039428711, 21.799951553345, -74.137733459473)
+        end)
+            
+        Tps:Button("Safe AFK #1", function()
+            game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(310.38958740234, 48.004989624023, -883.97509765625)
+        end)
+            
+        Tps:Button("Safe AFK #2", function()
+            game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-861.56481933594, -39.404216766357, -1132.5791015625)
+        end)
+            
+        Tps:Button("Safe AFK #3", function()
+            game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-833.5869140625, -3.6492006778717, -680.61407470703)
+        end)
+            
+        Tps:Button("Safe AFK #4 / BEST!", function()
+            game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(204.69744873047, 38.249988555908, 200000.09375)
+        end)
+            
+        Tps:Button("Unnamed Building #1", function()
+            game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(438.80780029297, 54.557632446289, -733.51055908203)
+        end)
+            
+            
+        Tps:Button("Unnamed Building #2", function()
+            game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-104.86197662354, 28.310289382935, -1125.8115234375)
+        end)
+            
+            Tps:Label("Save and Load Position:")
+            
+            Tps:Button("Save", function()
+                plr = game:GetService('Players').LocalPlayer
+                    X1 = plr.Character:FindFirstChild('HumanoidRootPart').CFrame.X
+                    Y1 = plr.Character:FindFirstChild('HumanoidRootPart').CFrame.Y
+                    Z1 = plr.Character:FindFirstChild('HumanoidRootPart').CFrame.Z
+                    game.StarterGui:SetCore("SendNotification", {
+                        Title = "Save",
+                        Text = 'Position Saved',
+                        Duration = 1,
+                    })
+            end)
+            
+            Tps:Button("Load", function()
+                plr = game:GetService('Players').LocalPlayer
+                plr.Character.HumanoidRootPart.CFrame = CFrame.new(X1,Y1+5,Z1)
+                game.StarterGui:SetCore("SendNotification", {
+                    Title = "Load",
+                    Text = 'Loaded Position',
+                    Duration = 1,
+                })
+            end)
     
     function DrawText()
         local Text = Drawing.new("Text")
