@@ -81,8 +81,6 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 	local SupportedFrameGlow2 = Instance.new("ImageLabel")
 	local SupportedTitle = Instance.new("TextLabel")
 
-	--Properties:
-
 	Loading.Name = "Loading"
 	Loading.Parent = game.CoreGui
 	Loading.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
@@ -106,7 +104,7 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 	LoadingFrameTitle.Position = UDim2.new(0, 0, 0.0769281536, 0)
 	LoadingFrameTitle.Size = UDim2.new(0, 360, 0, 34)
 	LoadingFrameTitle.Font = Enum.Font.Gotham
-	LoadingFrameTitle.Text = "| Puppy Ware |"
+	LoadingFrameTitle.Text = "| " .. Htitle .. " |"
 	LoadingFrameTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
 	LoadingFrameTitle.TextSize = 19.000
 	LoadingFrameTitle.TextTransparency = 1.000
@@ -1154,6 +1152,8 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 						TweenInfo.new(.35, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
 						{Size = UDim2.new(0, 0,0, 263)}
 					):Play()
+					wait(.35)
+					v.Visible = false
 				end 
 			end
 			for i, v in next, AllTabs:GetChildren() do
