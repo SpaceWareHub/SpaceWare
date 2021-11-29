@@ -7,6 +7,18 @@ if game.CoreGui:FindFirstChild("Library") then
   end
 
 if game.PlaceId == 2788229376 then
+    local Players = game:GetService("Players")
+local Player = Players.LocalPlayer
+local PlayerGui = Player:WaitForChild("PlayerGui")
+local BubbleChatUI = PlayerGui:WaitForChild("BubbleChat")
+BubbleChatUI.DescendantAdded:Connect(function(Descendant)
+    if Descendant:IsA("ImageLabel") then
+        Descendant.ImageColor3 = Color3.fromRGB(0, 0, 0)
+        Descendant.ImageTransparency = 0.3
+    elseif Descendant:IsA("TextLabel") then
+        Descendant.TextColor3 = Color3.new(1,1,1)
+    end
+end)
     enabled = true --chat "/spy" to toggle!
 spyOnMyself = true --if true will check your messages too
 public = false --if true will chat the logs publicly (fun, risky)
@@ -169,54 +181,54 @@ chatFrame.ChatBarParentFrame.Position = chatFrame.ChatChannelParentFrame.Positio
         end)
     end
 
-    Animation:Button("TryHard - Pro Animation", function()
-        local Animate = game.Players.LocalPlayer.Character.Animate
+    Animation:Dropdown("Animations",{'TryHard - Pro Animation','Barbie Animation','Rthro Animation','No Animation'}, function(selected)
+        if selected == "TryHard - Pro Animation" then
+            local Animate = game.Players.LocalPlayer.Character.Animate
     
-        Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=782841498"
-        Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=782845736"
-        Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=616168032"
-        Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=616163682"
-        Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=2510197830"
-        Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=2510192778"
-        Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=2510195892"
+            Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=782841498"
+            Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=782845736"
+            Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=616168032"
+            Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=616163682"
+            Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=2510197830"
+            Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=2510192778"
+            Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=2510195892"
+        elseif selected == "Barbie Animation" then
+            local Animate = game.Players.LocalPlayer.Character.Animate
+            Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=910004836"
+            Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=910009958"
+            Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=910034870"
+            Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=910025107"
+            Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=910016857"
+            Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=910001910"
+            Animate.swimidle.SwimIdle.AnimationId = "http://www.roblox.com/asset/?id=910030921"
+            Animate.swim.Swim.AnimationId = "http://www.roblox.com/asset/?id=910028158"
+        elseif selected == "Rthro Animation" then
+            local Animate = game.Players.LocalPlayer.Character.Animate
+            Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=2510196951"
+            Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=2510197257"
+            Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=2510202577"
+            Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=2510198475"
+            Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=2510197830"
+            Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=2510195892"
+            Animate.swimidle.SwimIdle.AnimationId = "http://www.roblox.com/asset/?id=2510201162"
+            Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=2510192778"
+            Animate.swim.Swim.AnimationId = "http://www.roblox.com/asset/?id=2510199791"
+        elseif selected == "No Animation" then
+            local Animate = game.Players.LocalPlayer.Character.Animate
+            Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=0"
+            Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=0"
+            Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=0"
+            Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=0"
+            Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=0"
+            Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=0"
+            Animate.swimidle.SwimIdle.AnimationId = "http://www.roblox.com/asset/?id=0"
+            Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=0"
+            Animate.swim.Swim.AnimationId = "http://www.roblox.com/asset/?id=0"
+        end
     end)
-    
-    Animation:Button("Barbie Animation", function()
-        local Animate = game.Players.LocalPlayer.Character.Animate
-        Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=910004836"
-        Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=910009958"
-        Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=910034870"
-        Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=910025107"
-        Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=910016857"
-        Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=910001910"
-        Animate.swimidle.SwimIdle.AnimationId = "http://www.roblox.com/asset/?id=910030921"
-        Animate.swim.Swim.AnimationId = "http://www.roblox.com/asset/?id=910028158"
-    end)
-    
-    Animation:Button("Rthro Animation", function()
-        local Animate = game.Players.LocalPlayer.Character.Animate
-        Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=2510196951"
-        Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=2510197257"
-        Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=2510202577"
-        Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=2510198475"
-        Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=2510197830"
-        Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=2510195892"
-        Animate.swimidle.SwimIdle.AnimationId = "http://www.roblox.com/asset/?id=2510201162"
-        Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=2510192778"
-        Animate.swim.Swim.AnimationId = "http://www.roblox.com/asset/?id=2510199791"
-    end)
-    
-    Animation:Button("No Animation", function()
-        local Animate = game.Players.LocalPlayer.Character.Animate
-        Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=0"
-        Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=0"
-        Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=0"
-        Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=0"
-        Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=0"
-        Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=0"
-        Animate.swimidle.SwimIdle.AnimationId = "http://www.roblox.com/asset/?id=0"
-        Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=0"
-        Animate.swim.Swim.AnimationId = "http://www.roblox.com/asset/?id=0"
+
+    Animation:Button('Button',function(state)
+
     end)
 
     Scripts:Button("Destiny -  Rage Mode -Many Features", function()
@@ -465,22 +477,12 @@ Main:Button("Fly  [X]", function()
 		Fly()
 	end
 end)
-Main:Button("Fly Type", function()
-    	if FLYMODE == 'Default' then
-		FLYMODE = 'IY'
-	game.StarterGui:SetCore("SendNotification", {
-	Title = "Fly Type",
-	Text = 'IY / Reset To Change.',
-	Duration = 1,
-    })
-	else
-		FLYMODE = 'Default'
-        game.StarterGui:SetCore("SendNotification", {
-            Title = "Fly Type",
-            Text = 'Default / Reset To Change.',
-            Duration = 1,
-        })
-	end
+Main:Dropdown("Fly Mode",{'Default - Reset To Change','IY - Reset To Change'}, function(selected)
+    if selected == "Default - Reset To Change" then
+        FLYMODE = 'Default'
+    elseif selected == "IY - Reset To Change" then
+        FLYMODE = 'IY'
+    end
 end)
 
 Main:Slider('Fly Speed',20,60,0,function(num)
@@ -488,6 +490,27 @@ Main:Slider('Fly Speed',20,60,0,function(num)
 end)
 
 Main:Line()
+
+Main:Toggle('WalkSpeed',function(state)
+    Client.Toggles.WalkSpeed = state
+    if game.Players.LocalPlayer.Character:FindFirstChild('Animate') then
+        getsenv(game.Players.LocalPlayer.Character.Animate).checkingSPEED = function() return nil end
+    end
+    if Client.Toggles.WalkSpeed == true then
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Client.Values.WalkSpeed
+    else
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+    end
+end)
+Main:Slider('WalkSpeed Value',16,130,0,function(num)
+    Client.Values.WalkSpeed = num
+    if Client.Toggles.WalkSpeed == true then
+        if game.Players.LocalPlayer.Character:FindFirstChild('Animate') then
+            getsenv(game.Players.LocalPlayer.Character.Animate).checkingSPEED = function() return nil end
+        end
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Client.Values.WalkSpeed
+    end
+end)
 
     Main:Slider("Field Of View - Better View", 70, 140,0,function(t)
         game.Workspace.Camera.FieldOfView = t
@@ -528,27 +551,6 @@ Main:Line()
     Main:Button("SuperHuman [Z]", function()
         loadstring(game:HttpGet(('https://pastebin.com/raw/wtq5bc0t'),true))()
     end)
-
-    Main:Toggle('WalkSpeed',function(state)
-        Client.Toggles.WalkSpeed = state
-        if game.Players.LocalPlayer.Character:FindFirstChild('Animate') then
-            getsenv(game.Players.LocalPlayer.Character.Animate).checkingSPEED = function() return nil end
-        end
-        if Client.Toggles.WalkSpeed == true then
-            game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Client.Values.WalkSpeed
-        else
-            game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
-        end
-    end)
-    Main:Slider('WalkSpeed Value',16,130,0,function(num)
-        Client.Values.WalkSpeed = num
-        if Client.Toggles.WalkSpeed == true then
-            if game.Players.LocalPlayer.Character:FindFirstChild('Animate') then
-                getsenv(game.Players.LocalPlayer.Character.Animate).checkingSPEED = function() return nil end
-            end
-            game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Client.Values.WalkSpeed
-        end
-    end)
     
     Main:Toggle('Noclip',function(state)
         Client.Toggles.NoClip = state
@@ -578,51 +580,6 @@ Main:Line()
                 game.ReplicatedStorage.MainEvent:FireServer("Stomp")
             end
         end)
-end)
-    
- Main:Button("Freefist [T]", function()
-    local player = game.Players.LocalPlayer
-    local localPlayer       = game:GetService("Players").LocalPlayer;
-    local localCharacter    = localPlayer.Character
-    local Mouse             = localPlayer:GetMouse();
-    local FistControl       = false
-    local LeftFist          = localCharacter.LeftHand;
-    local RightFist         = localCharacter.RightHand;
-
-
-for i,v in next, workspace:GetDescendants() do
-    if v:IsA'Seat' then
-        v:Destroy()
-    end
-end
-pcall(function()
-    player.Character.LeftHand.LeftWrist:Destroy();
-    player.Character.RightHand.RightWrist:Destroy();
-end);
-local loopFunction = function()
-    player.Character.LeftHand.CFrame  = CFrame.new(Mouse.Hit.p);
-    player.Character.RightHand.CFrame = CFrame.new(Mouse.Hit.p);
-end;        
-local Loop
-local Start = function()
-    Loop = game:GetService("RunService").Heartbeat:Connect(loopFunction);
-end;         
-local Pause = function()
-    Loop:Disconnect()
-end;
-    Mouse.KeyDown:connect(function(key)
-        if key == "t" then
-        if FistControl == false then
-            FistControl = true;
-            Start();
-        elseif FistControl == true then
-            FistControl = false;
-            Pause();
-            player.Character.LeftHand.CFrame  = player.Character.LeftLowerArm.CFrame
-            player.Character.RightHand.CFrame = player.Character.RightLowerArm.CFrame
-        end;
-    end;
-end)
 end)
 
 Main:Button("Force Reset", function()
@@ -695,39 +652,6 @@ Main:Button("Anonymous", function()
 			wait()
 		end
 	end)
-end)
-
-Main:Toggle("Reach", false, function(bool)
-    local player = game.Players.LocalPlayer
-        fistreac = false
-    if bool then
-            fistreac = true
-            while fistreac == true do
-                    wait()
-                    local success, err = pcall(function()
-                        if player.Character.BodyEffects.Attacking.Value == true then
-                            for i,v in pairs(game:GetService('Players'):GetChildren()) do
-                                if (v.Character.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.LeftHand.Position).Magnitude <= 50 then
-                                    if game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") then
-                                        if game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool"):FindFirstChild('Handle') then
-                                            firetouchinterest(game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool").Handle, v.Character.UpperTorso, 0)
-                                        else
-                                            firetouchinterest(game.Players.LocalPlayer.Character['RightHand'], v.Character.UpperTorso, 0)
-                                            firetouchinterest(game.Players.LocalPlayer.Character['LeftHand'], v.Character.UpperTorso, 0)
-                                            firetouchinterest(game.Players.LocalPlayer.Character['RightFoot'], v.Character.UpperTorso, 0)
-                                            firetouchinterest(game.Players.LocalPlayer.Character['LeftFoot'], v.Character.UpperTorso, 0)
-                                            firetouchinterest(game.Players.LocalPlayer.Character['RightLowerLeg'], v.Character.UpperTorso, 0)
-                                            firetouchinterest(game.Players.LocalPlayer.Character['LeftLowerLeg'], v.Character.UpperTorso, 0)
-                                        end
-                                    end
-                                end
-                            end
-                        end
-                    end)
-            end
-    else
-        fistreac = false
-    end
 end)
 
     game.Players.LocalPlayer.Character.Humanoid:GetPropertyChangedSignal("WalkSpeed"):Connect(function()
@@ -1220,7 +1144,18 @@ end)
     end
 
 elseif game.PlaceId == 5602055394 then
-    
+    local Players = game:GetService("Players")
+local Player = Players.LocalPlayer
+local PlayerGui = Player:WaitForChild("PlayerGui")
+local BubbleChatUI = PlayerGui:WaitForChild("BubbleChat")
+BubbleChatUI.DescendantAdded:Connect(function(Descendant)
+    if Descendant:IsA("ImageLabel") then
+        Descendant.ImageColor3 = Color3.fromRGB(0, 0, 0)
+        Descendant.ImageTransparency = 0.3
+    elseif Descendant:IsA("TextLabel") then
+        Descendant.TextColor3 = Color3.new(1,1,1)
+    end
+end)
     enabled = true --chat "/spy" to toggle!
     spyOnMyself = true --if true will check your messages too
     public = false --if true will chat the logs publicly (fun, risky)
@@ -1365,54 +1300,50 @@ elseif game.PlaceId == 5602055394 then
         local ESP = Window:Tab("ESP")
         local Animation = Window:Tab("Animation")
 
-        Animation:Button("TryHard - Pro Animation", function()
-            local Animate = game.Players.LocalPlayer.Character.Animate
+        Animation:Dropdown("Animations",{'TryHard - Pro Animation','Barbie Animation','Rthro Animation','No Animation'}, function(selected)
+            if selected == "TryHard - Pro Animation" then
+                local Animate = game.Players.LocalPlayer.Character.Animate
         
-            Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=782841498"
-            Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=782845736"
-            Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=616168032"
-            Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=616163682"
-            Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=2510197830"
-            Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=2510192778"
-            Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=2510195892"
-        end)
-        
-        Animation:Button("Barbie Animation", function()
-            local Animate = game.Players.LocalPlayer.Character.Animate
-            Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=910004836"
-            Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=910009958"
-            Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=910034870"
-            Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=910025107"
-            Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=910016857"
-            Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=910001910"
-            Animate.swimidle.SwimIdle.AnimationId = "http://www.roblox.com/asset/?id=910030921"
-            Animate.swim.Swim.AnimationId = "http://www.roblox.com/asset/?id=910028158"
-        end)
-        
-        Animation:Button("Rthro Animation", function()
-            local Animate = game.Players.LocalPlayer.Character.Animate
-            Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=2510196951"
-            Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=2510197257"
-            Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=2510202577"
-            Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=2510198475"
-            Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=2510197830"
-            Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=2510195892"
-            Animate.swimidle.SwimIdle.AnimationId = "http://www.roblox.com/asset/?id=2510201162"
-            Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=2510192778"
-            Animate.swim.Swim.AnimationId = "http://www.roblox.com/asset/?id=2510199791"
-        end)
-        
-        Animation:Button("No Animation", function()
-            local Animate = game.Players.LocalPlayer.Character.Animate
-            Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=0"
-            Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=0"
-            Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=0"
-            Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=0"
-            Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=0"
-            Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=0"
-            Animate.swimidle.SwimIdle.AnimationId = "http://www.roblox.com/asset/?id=0"
-            Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=0"
-            Animate.swim.Swim.AnimationId = "http://www.roblox.com/asset/?id=0"
+                Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=782841498"
+                Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=782845736"
+                Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=616168032"
+                Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=616163682"
+                Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=2510197830"
+                Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=2510192778"
+                Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=2510195892"
+            elseif selected == "Barbie Animation" then
+                local Animate = game.Players.LocalPlayer.Character.Animate
+                Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=910004836"
+                Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=910009958"
+                Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=910034870"
+                Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=910025107"
+                Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=910016857"
+                Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=910001910"
+                Animate.swimidle.SwimIdle.AnimationId = "http://www.roblox.com/asset/?id=910030921"
+                Animate.swim.Swim.AnimationId = "http://www.roblox.com/asset/?id=910028158"
+            elseif selected == "Rthro Animation" then
+                local Animate = game.Players.LocalPlayer.Character.Animate
+                Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=2510196951"
+                Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=2510197257"
+                Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=2510202577"
+                Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=2510198475"
+                Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=2510197830"
+                Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=2510195892"
+                Animate.swimidle.SwimIdle.AnimationId = "http://www.roblox.com/asset/?id=2510201162"
+                Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=2510192778"
+                Animate.swim.Swim.AnimationId = "http://www.roblox.com/asset/?id=2510199791"
+            elseif selected == "No Animation" then
+                local Animate = game.Players.LocalPlayer.Character.Animate
+                Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=0"
+                Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=0"
+                Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=0"
+                Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=0"
+                Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=0"
+                Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=0"
+                Animate.swimidle.SwimIdle.AnimationId = "http://www.roblox.com/asset/?id=0"
+                Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=0"
+                Animate.swim.Swim.AnimationId = "http://www.roblox.com/asset/?id=0"
+            end
         end)
 
         Aimlock:Button("Kitten Assist - Whitelisted", function()
@@ -1694,7 +1625,19 @@ if game.PlaceId == 1962086868 then
     y = game:GetService("Players").LocalPlayer.PlayerScripts.LocalScript
     getsenv(y).kick = function() return nil end
     getsenv(y).kick()
-    
+    local Players = game:GetService("Players")
+local Player = Players.LocalPlayer
+local PlayerGui = Player:WaitForChild("PlayerGui")
+local BubbleChatUI = PlayerGui:WaitForChild("BubbleChat")
+BubbleChatUI.DescendantAdded:Connect(function(Descendant)
+    if Descendant:IsA("ImageLabel") then
+        Descendant.ImageColor3 = Color3.fromRGB(0, 0, 0)
+        Descendant.ImageTransparency = 0.3
+    elseif Descendant:IsA("TextLabel") then
+        Descendant.TextColor3 = Color3.new(1,1,1)
+    end
+end)
+
     local Coastified = loadstring(game:HttpGet"https://raw.githubusercontent.com/SpaceWareHub/SpaceWare/main/SpaceWareLib")()
     local win = Coastified:Window("Lunar Client", "Tower Of Hell", Enum.KeyCode.RightControl)
     local MainWindow = win:Tab("Main")
@@ -1827,7 +1770,18 @@ if game.PlaceId == 1962086868 then
         end)
     end)
 elseif game.PlaceId == 2377868063 then
-
+local Players = game:GetService("Players")
+local Player = Players.LocalPlayer
+local PlayerGui = Player:WaitForChild("PlayerGui")
+local BubbleChatUI = PlayerGui:WaitForChild("BubbleChat")
+BubbleChatUI.DescendantAdded:Connect(function(Descendant)
+    if Descendant:IsA("ImageLabel") then
+        Descendant.ImageColor3 = Color3.fromRGB(0, 0, 0)
+        Descendant.ImageTransparency = 0.3
+    elseif Descendant:IsA("TextLabel") then
+        Descendant.TextColor3 = Color3.new(1,1,1)
+    end
+end)
 local Network2 = game:GetService("ReplicatedStorage").Network.LookDir
 local Hook2 
 Hook2 = hookfunction(Network2.FireServer, newcclosure(function(...)
@@ -2733,6 +2687,18 @@ end
 end
 
 if game.PlaceId == 142823291 then
+local Players = game:GetService("Players")
+local Player = Players.LocalPlayer
+local PlayerGui = Player:WaitForChild("PlayerGui")
+local BubbleChatUI = PlayerGui:WaitForChild("BubbleChat")
+BubbleChatUI.DescendantAdded:Connect(function(Descendant)
+    if Descendant:IsA("ImageLabel") then
+        Descendant.ImageColor3 = Color3.fromRGB(0, 0, 0)
+        Descendant.ImageTransparency = 0.3
+    elseif Descendant:IsA("TextLabel") then
+        Descendant.TextColor3 = Color3.new(1,1,1)
+    end
+end)
     local Client = {
         toggles = {
             Murder = "I don't know yet cause... idk", --Client.toggles.Murder
@@ -2903,7 +2869,7 @@ if game.PlaceId == 142823291 then
     end
     end)
     
-    Mainz:Button('"Kill Murder (Sheriff)',function(state)
+    Mainz:Button('Kill Murder (Sheriff)',function(state)
     box = Instance.new('Part',workspace)
     box.Name = "DarkHub"
     box.Anchored = true
@@ -2925,36 +2891,23 @@ if game.PlaceId == 142823291 then
     
     end)
     
-    
-    
-    Character:Button('Emote: Floss',function()
-    game:GetService("ReplicatedStorage").PlayEmote:Fire("floss")
+    Character:Dropdown("Emotes",{'Floss','Zen','Sit','Dab','Ninja','Zombie','Headless'}, function(selected)
+        if selected == "Floss" then
+        game:GetService("ReplicatedStorage").PlayEmote:Fire("floss")
+        elseif selected == "Zen" then
+            game:GetService("ReplicatedStorage").PlayEmote:Fire("zen")
+        elseif selected == "Sit" then
+            game:GetService("ReplicatedStorage").PlayEmote:Fire("sit")
+        elseif selected == "Dab" then
+            game:GetService("ReplicatedStorage").PlayEmote:Fire("dab")
+        elseif selected == "Ninja" then
+            game:GetService("ReplicatedStorage").PlayEmote:Fire("ninja")
+        elseif selected == "Zombie" then
+            game:GetService("ReplicatedStorage").PlayEmote:Fire("zombie")
+        elseif selected == "Headless" then
+            game:GetService("ReplicatedStorage").PlayEmote:Fire("headless")
+        end
     end)
-    
-    Character:Button('Emote: Zen',function()
-    game:GetService("ReplicatedStorage").PlayEmote:Fire("zen")
-    end)
-    
-    Character:Button('Emote: Sit',function()
-    game:GetService("ReplicatedStorage").PlayEmote:Fire("sit")
-    end)
-    
-    Character:Button('Emote: Dab',function()
-    game:GetService("ReplicatedStorage").PlayEmote:Fire("dab")
-    end)
-    
-    Character:Button('Emote: Ninja',function()
-        game:GetService("ReplicatedStorage").PlayEmote:Fire("ninja")
-    end)
-    
-    Character:Button('Emote: Zombie',function()
-        game:GetService("ReplicatedStorage").PlayEmote:Fire("zombie")
-    end)
-    
-    Character:Button('Emote: Headless',function()
-        game:GetService("ReplicatedStorage").PlayEmote:Fire("headless")
-    end)
-    
         
     Visual:Button('Role-Esp',function(state)
      for i,v in pairs(game.Players:GetPlayers()) do
@@ -3192,6 +3145,18 @@ if game.PlaceId == 142823291 then
     return OldNamecall(self, ...)
     end)
 elseif game.PlaceId == 2551991523 then
+    local Players = game:GetService("Players")
+local Player = Players.LocalPlayer
+local PlayerGui = Player:WaitForChild("PlayerGui")
+local BubbleChatUI = PlayerGui:WaitForChild("BubbleChat")
+BubbleChatUI.DescendantAdded:Connect(function(Descendant)
+    if Descendant:IsA("ImageLabel") then
+        Descendant.ImageColor3 = Color3.fromRGB(0, 0, 0)
+        Descendant.ImageTransparency = 0.3
+    elseif Descendant:IsA("TextLabel") then
+        Descendant.TextColor3 = Color3.new(1,1,1)
+    end
+end)
     function GetScript()
         for i,v in pairs(game:GetService("ReplicatedFirst"):GetChildren()) do
             if (v.Name):match("^%-?%d+$") then
@@ -3282,6 +3247,18 @@ end)
 game.ReplicatedStorage.PlayerData[game.Players.LocalPlayer.UserId].PLUS.Value = true
 --use it whit Auto Farm to Get 1,5 % More coins when you farm
 elseif game.PlaceId == 5490351219 then
+    local Players = game:GetService("Players")
+local Player = Players.LocalPlayer
+local PlayerGui = Player:WaitForChild("PlayerGui")
+local BubbleChatUI = PlayerGui:WaitForChild("BubbleChat")
+BubbleChatUI.DescendantAdded:Connect(function(Descendant)
+    if Descendant:IsA("ImageLabel") then
+        Descendant.ImageColor3 = Color3.fromRGB(0, 0, 0)
+        Descendant.ImageTransparency = 0.3
+    elseif Descendant:IsA("TextLabel") then
+        Descendant.TextColor3 = Color3.new(1,1,1)
+    end
+end)
     --- created by nameless#3675
 
 -- Farms
