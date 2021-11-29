@@ -694,6 +694,49 @@ end)
         Settings.Names = Bool
     end)
 
+    Tps:Toggle('Teleport Tool - Click To Teleport', function(Tog)
+        if Tog then
+            mouse = game.Players.LocalPlayer:GetMouse()
+            tool = Instance.new("Tool")
+            tool.RequiresHandle = false
+            tool.Name = "Teleport Tool"
+            tool.Activated:connect(function()
+            local pos = mouse.Hit+Vector3.new(0,2.5,0)
+            pos = CFrame.new(pos.X,pos.Y,pos.Z)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pos
+            end)
+            tool.Parent = game.Players.LocalPlayer.Backpack            
+        else
+            tool:Destroy()
+        end
+    end)
+
+    Tps:Line()
+
+    Tps:Button("Save", function()
+        plr = game:GetService('Players').LocalPlayer
+            X1 = plr.Character:FindFirstChild('HumanoidRootPart').CFrame.X
+            Y1 = plr.Character:FindFirstChild('HumanoidRootPart').CFrame.Y
+            Z1 = plr.Character:FindFirstChild('HumanoidRootPart').CFrame.Z
+            game.StarterGui:SetCore("SendNotification", {
+                Title = "Save",
+                Text = 'Position Saved',
+                Duration = 1,
+            })
+    end)
+    
+    Tps:Button("Load", function()
+        plr = game:GetService('Players').LocalPlayer
+        plr.Character.HumanoidRootPart.CFrame = CFrame.new(X1,Y1+5,Z1)
+        game.StarterGui:SetCore("SendNotification", {
+            Title = "Load",
+            Text = 'Loaded Position',
+            Duration = 1,
+        })
+    end)
+    
+    Tps:Line()
+
     Tps:Button("AdminBase", function()
         game:GetService('Players').LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-729.89501953125, -39.654216766357, -885.79998779297)
         end)
@@ -919,30 +962,6 @@ end)
         Tps:Button("Unnamed Building #2", function()
             game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-104.86197662354, 28.310289382935, -1125.8115234375)
         end)
-            
-            Tps:Label("Save and Load Position:")
-            
-            Tps:Button("Save", function()
-                plr = game:GetService('Players').LocalPlayer
-                    X1 = plr.Character:FindFirstChild('HumanoidRootPart').CFrame.X
-                    Y1 = plr.Character:FindFirstChild('HumanoidRootPart').CFrame.Y
-                    Z1 = plr.Character:FindFirstChild('HumanoidRootPart').CFrame.Z
-                    game.StarterGui:SetCore("SendNotification", {
-                        Title = "Save",
-                        Text = 'Position Saved',
-                        Duration = 1,
-                    })
-            end)
-            
-            Tps:Button("Load", function()
-                plr = game:GetService('Players').LocalPlayer
-                plr.Character.HumanoidRootPart.CFrame = CFrame.new(X1,Y1+5,Z1)
-                game.StarterGui:SetCore("SendNotification", {
-                    Title = "Load",
-                    Text = 'Loaded Position',
-                    Duration = 1,
-                })
-            end)
     
     function DrawText()
         local Text = Drawing.new("Text")
@@ -3646,67 +3665,6 @@ game:GetService("ReplicatedStorage").Aero.AeroRemoteServices.SuperUpgradeService
 end
 end)
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ------------------------------------------------------------------------------------------------------------
 -- Worlds Section
 local sss = s:Tab("Worlds")
