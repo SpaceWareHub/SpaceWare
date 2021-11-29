@@ -1596,40 +1596,32 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 			DropToggle.ImageRectOffset = Vector2.new(324, 364)
 			DropToggle.ImageRectSize = Vector2.new(36, 36)
 
-			local DropdownFrame = Instance.new("Frame")
 			local DropItemHolder = Instance.new("ScrollingFrame")
 			local DropItemHolderUIList = Instance.new("UIListLayout")
 
-			DropdownFrame.Name = "DropdownFrame"
-			DropdownFrame.Parent = NewPages
-			DropdownFrame.BackgroundColor3 = Color3.fromRGB(29, 26, 53)
-			DropdownFrame.Position = UDim2.new(0, 0, 0.202399909, 0)
-			DropdownFrame.BorderSizePixel = 0
-			DropdownFrame.BackgroundTransparency = 1
-			DropdownFrame.Size = UDim2.new(0, 375, 0, 0)
-			DropdownFrame.ClipsDescendants = true
-			DropdownFrame.Visible = false
-
 			DropItemHolder.Name = "DropItemHolder"
-			DropItemHolder.Parent = DropdownFrame
+			DropItemHolder.Parent = NewPages
 			DropItemHolder.Active = true
-			DropItemHolder.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			DropItemHolder.BackgroundTransparency = 1.000
+			DropItemHolder.BackgroundColor3 = Color3.fromRGB(29, 26, 53)
+			DropItemHolder.BackgroundTransparency = 0
 			DropItemHolder.BorderSizePixel = 0
-			DropItemHolder.Position = UDim2.new(0, 0, 0, 0)
-			DropItemHolder.Size = UDim2.new(1, 0, 1, 0)
+			DropItemHolder.Position = UDim2.new(0, 0, 0.202399909, 0)
+			DropItemHolder.Size = UDim2.new(0, 375, 0, 0)
 			DropItemHolder.BottomImage = "rbxasset://textures/ui/Scroll/scroll-middle.png"
 			DropItemHolder.CanvasSize = UDim2.new(0, 0, 0, 0)
 			DropItemHolder.ScrollBarThickness = 2
 			DropItemHolder.TopImage = "rbxasset://textures/ui/Scroll/scroll-middle.png"
 			DropItemHolder.AutomaticCanvasSize = Enum.AutomaticSize.Y
+			DropItemHolder.ClipsDescendants = true
+			DropItemHolder.Visible = false
+			
 
 			DropItemHolderUIList.Name = "DropItemHolderUIList"
 			DropItemHolderUIList.Parent = DropItemHolder
 			DropItemHolderUIList.SortOrder = Enum.SortOrder.LayoutOrder
 			DropItemHolderUIList.Padding = UDim.new(0, 0)
 			DropItemHolderUIList.HorizontalAlignment = Enum.HorizontalAlignment.Center
-
+			
 			Dropdown.MouseButton1Click:Connect(
 				function()
 					if DropToggled == false then
@@ -1640,8 +1632,8 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 							{Rotation = 360}
 						):Play()
 						DropdownTitle.Text = Selected
-						DropdownFrame.Visible = true
-						DropdownFrame:TweenSize(
+						DropItemHolder.Visible = true
+						DropItemHolder:TweenSize(
 							UDim2.new(0, 375, 0, 85),
 							Enum.EasingDirection.Out,
 							Enum.EasingStyle.Quart,
@@ -1650,7 +1642,7 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 						)
 						repeat
 							wait()
-						until DropdownFrame.Size == UDim2.new(0, 375, 0, DropdownFrameSize)
+						until DropItemHolder.Size == UDim2.new(0, 375, 0, DropdownFrameSize)
 						NewPages.CanvasSize = UDim2.new(0, 0, 0, ElementListing.AbsoluteContentSize.Y)
 					else
 						DropToggled = not DropToggled
@@ -1660,7 +1652,7 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 							{Rotation = 0}
 						):Play()
 						DropdownTitle.Text = text
-						DropdownFrame:TweenSize(
+						DropItemHolder:TweenSize(
 							UDim2.new(0, 375, 0, 0),
 							Enum.EasingDirection.Out,
 							Enum.EasingStyle.Quart,
@@ -1668,10 +1660,10 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 							true
 						)
 						wait(.05)
-						DropdownFrame.Visible = false
+						DropItemHolder.Visible = false
 						repeat
 							wait()
-						until DropdownFrame.Size == UDim2.new(0, 375, 0, 0)
+						until DropItemHolder.Size == UDim2.new(0, 375, 0, 0)
 						NewPages.CanvasSize = UDim2.new(0, 0, 0, ElementListing.AbsoluteContentSize.Y)
 					end
 				end
