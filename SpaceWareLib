@@ -1634,7 +1634,7 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 						DropdownTitle.Text = Selected
 						DropItemHolder.Visible = true
 						DropItemHolder:TweenSize(
-							UDim2.new(0, 375, 0, 85),
+							UDim2.new(0, 375, 0, DropdownFrameSize),
 							Enum.EasingDirection.Out,
 							Enum.EasingStyle.Quart,
 							0.5,
