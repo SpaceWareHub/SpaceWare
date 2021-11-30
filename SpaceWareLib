@@ -1550,8 +1550,8 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 		function ElementHandler:Dropdown(text, list, callback)
 			local DropToggled = false
 			local ItemCount = 0
-			local DropdownFrameSize = -0
-			local ItemFrameSize = -0
+			local DropdownFrameSize = 0
+			local ItemFrameSize = 0
 			local Selected = text
 
 			local Dropdown = Instance.new("TextButton")
@@ -1614,7 +1614,6 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 			DropItemHolder.AutomaticCanvasSize = Enum.AutomaticSize.Y
 			DropItemHolder.ClipsDescendants = true
 			DropItemHolder.Visible = false
-			
 
 			DropItemHolderUIList.Name = "DropItemHolderUIList"
 			DropItemHolderUIList.Parent = DropItemHolder
