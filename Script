@@ -4,7 +4,15 @@ if game.CoreGui:FindFirstChild("Library") then
       Text = "Aspect Already Executed!",
       Duration = 1
     })
-  end
+end
+
+if game.CoreGui:FindFirstChild("Loading") then
+    return game.StarterGui:SetCore("SendNotification", {
+      Title = "ALREADY EXECUTED",
+      Text = "Aspect Already Executed!",
+      Duration = 1
+    })
+end
 
 if game.PlaceId == 2788229376 then
     local Players = game:GetService("Players")
@@ -1255,8 +1263,6 @@ end)
         local Camera = game:GetService("Workspace").CurrentCamera
         local Players = game:GetService("Players")
         local Player = Players.LocalPlayer
-        local Mouse = Player:GetMouse()
-        local Metatable = getrawmetatable(game)
         Client = {
             Toggles = {
                 WalkSpeed = false
