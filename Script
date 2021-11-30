@@ -15,6 +15,28 @@ if game.CoreGui:FindFirstChild("Loading") then
 end
 
 if game.PlaceId == 2788229376 then
+    for i,v in pairs(game.Players:GetPlayers())do
+        if v ~= game.Players.LocalPlayer then
+            table.insert(playerlist,v.Name)
+        end
+    end
+    
+    game.Players.PlayerAdded:Connect(function(player)
+        local name = player.Name
+        table.insert(playerlist,name)
+        drop:Refresh(playerlist)
+    end)
+    
+    game.Players.PlayerRemoving:Connect(function(player)
+        local name = player.Name
+        for i,v in pairs(playerlist)do
+            if v == name then  
+                table.remove(playerlist,i)
+            end
+        end
+        drop:Refresh(playerlist)
+    end)
+
     local Players = game:GetService("Players")
 local Player = Players.LocalPlayer
 local PlayerGui = Player:WaitForChild("PlayerGui")
@@ -712,6 +734,15 @@ end)
     ESP:Toggle('Name Esp', function(Bool)
         Settings.Names = Bool
     end)
+
+    Tps:Dropdown("Teleport To Player",playerlist, function(selected)
+        xdvalue = selected
+    end)
+
+    Tps:Button("Teleport", function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[xdvalue].Character.HumanoidRootPart.CFrame 
+    end)
+    Tps:Line()
 
     Tps:Toggle('Teleport Tool - Click To Teleport', function(Tog)
         if Tog then
