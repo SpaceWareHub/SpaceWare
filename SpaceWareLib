@@ -1620,7 +1620,7 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 			DropItemHolderUIList.SortOrder = Enum.SortOrder.LayoutOrder
 			DropItemHolderUIList.Padding = UDim.new(0, 0)
 			DropItemHolderUIList.HorizontalAlignment = Enum.HorizontalAlignment.Center
-			
+
 			Dropdown.MouseButton1Click:Connect(
 				function()
 					if DropToggled == false then
@@ -1735,7 +1735,7 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 						DropdownTitle.Text = text
 						Selected = v
 						pcall(callback, v)
-						DropdownFrame:TweenSize(
+						DropItemHolder:TweenSize(
 							UDim2.new(0, 375, 0, 0),
 							Enum.EasingDirection.Out,
 							Enum.EasingStyle.Quart,
@@ -1743,10 +1743,10 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 							true
 						)
 						wait(.05)
-						DropdownFrame.Visible = false
+						DropItemHolder.Visible = false
 						repeat
 							wait()
-						until DropdownFrame.Size == UDim2.new(0, 375, 0, 0)
+						until DropItemHolder.Size == UDim2.new(0, 375, 0, 0)
 						NewPages.CanvasSize = UDim2.new(0, 0, 0, ElementListing.AbsoluteContentSize.Y)
 					end
 				)
