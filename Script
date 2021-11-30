@@ -545,7 +545,22 @@ end)
     end)
 
     Main:Button("SuperHuman [Z]", function()
-        loadstring(game:HttpGet(('https://pastebin.com/raw/wtq5bc0t'),true))()
+        superhuman = false
+        plr = game.Players.LocalPlayer
+        mouse = plr:GetMouse()
+        mouse.KeyDown:connect(function(key)
+            if key == "z" and superhuman == false then
+                superhuman = true
+                game.Players.LocalPlayer.Character.Humanoid.Name = "Humz"
+                game.Players.LocalPlayer.Character.Humz.WalkSpeed = 150
+                game.Players.LocalPlayer.Character.Humz.JumpPower = 250
+            elseif key == "z" and superhuman == true then
+                superhuman = false
+                game.Players.LocalPlayer.Character.Humz.WalkSpeed = 16
+                game.Players.LocalPlayer.Character.Humz.JumpPower = 50
+                game.Players.LocalPlayer.Character.Humz.Name = "Humanoid"
+            end
+        end)
     end)
     
     Main:Toggle('Noclip',function(state)
