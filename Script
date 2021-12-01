@@ -3500,3 +3500,81 @@ ssss:Slider("JumpPower",16,500,0,function(v)
     game.Players.LocalPlayer.Character.Humanoid.JumpPower = (v)
 end)
 end
+
+if game.PlaceId == 5523314295 then
+    local lib = loadstring(game:HttpGet"https://raw.githubusercontent.com/SpaceWareHub/SpaceWare/main/SpaceWareLib")()
+    local main = lib:Window("Aspect", "Hellreaver", Enum.KeyCode.RightControl)
+    
+    Client = {
+        Toggles = {
+            SilentAim = false
+        }
+    }
+    
+    local Main = main:Tab("Main")
+    Main:Toggle('Silent Aim',function(state)
+        Client.Toggles.SilentAim = state
+    end)
+    Main:Button('Name Esp',function()
+        local gui = Instance.new("BillboardGui")
+        local esp = Instance.new("TextLabel",gui) ---- new instances to make the billboard gui and the textlabel
+        
+        gui.Name = "Cracked esp"; ---- properties of the esp
+        gui.ResetOnSpawn = false
+        gui.AlwaysOnTop = true;
+        gui.LightInfluence = 0;
+        gui.Size = UDim2.new(1.75, 0, 1.75, 0);
+        esp.BackgroundColor3 = Color3.fromRGB(255, 255, 255);
+        esp.Text = ""
+        esp.Size = UDim2.new(0.0001, 0.00001, 0.0001, 0.00001);
+        esp.BorderSizePixel = 4;
+        esp.BorderSizePixel = 0
+        esp.TextStrokeTransparency = 0
+        esp.TextStrokeColor3 = Color3.fromRGB(0,0,0)
+        esp.Font = "SourceSans"
+        esp.TextSize = 20
+        esp.TextColor3 = Color3.fromRGB(190,190,0) -- text colour
+        
+        game:GetService("RunService").RenderStepped:Connect(function() ---- loops faster than a while loop 🙂
+            for i,v in pairs (game:GetService("Players"):GetPlayers()) do
+                if v ~= game:GetService("Players").LocalPlayer and v.Character.Head:FindFirstChild("Cracked esp")==nil  then -- craeting checks for team check, local player etc
+                    esp.Text = "[ "..v.Name.." ]"
+                    gui:Clone().Parent = v.Character.Head
+            end
+        end
+        end)
+    end)
+    
+    
+    
+    function GetClosestPlr()
+        Plr = nil
+        MaxDis = math.huge
+        for i,v in pairs(game.Players.GetPlayers(game.Players)) do
+            if v ~= game.Players.LocalPlayer and v.TeamColor == game.Players.LocalPlayer.TeamColor and v.Character and v.Character.FindFirstChild(v.Character,"Head") and v.Character.FindFirstChild(v.Character,"Head").IsA(v.Character.FindFirstChild(v.Character,"Head"),'Part') then
+                local Pos, Vis = game.Workspace.CurrentCamera.WorldToScreenPoint(game.Workspace.CurrentCamera,v.Character.FindFirstChild(v.Character,"Head").Position)
+                if Vis then
+                    mag = (Vector2.new(Pos.X,Pos.Y) - Vector2.new(game.Players.LocalPlayer.GetMouse(game.Players.LocalPlayer).X,game.Players.LocalPlayer.GetMouse(game.Players.LocalPlayer).Y)).magnitude
+                    if mag < MaxDis and mag <= 300 then
+                        Plr = v
+                        MaxDis = mag
+                    end
+                end
+            end
+        end
+        return Plr
+    end
+    local GameMT = getrawmetatable(game)
+    local OldNC = GameMT.__namecall
+    setreadonly(GameMT, false)
+    GameMT.__namecall = newcclosure(function(self, ...)
+        if Client.Toggles.SilentAim and tostring(getnamecallmethod()) == 'FindPartOnRayWithIgnoreList' and getfenv(2).script.Name == '_client' then
+            local Args = {...}
+            if GetClosestPlr() ~= nil then
+                return OldNC(self,Ray.new(game.Workspace.CurrentCamera.CFrame.p,CFrame.new(game.Workspace.CurrentCamera.CFrame.p,GetClosestPlr().Character.Head.Position).LookVector.Unit * 999),Args[2])
+            end
+        end
+        return OldNC(self, ...)
+    end)
+    setreadonly(GameMT, true)
+end
