@@ -16,6 +16,66 @@ end
 
 if game.PlaceId == 2788229376 then
 
+    enabled = true --chat "/spy" to toggle!
+    spyOnMyself = true --if true will check your messages too
+    public = false --if true will chat the logs publicly (fun, risky)
+    publicItalics = true --if true will use /me to stand out
+    privateProperties = { --customize private logs
+        Color = Color3.fromRGB(255,0,0); 
+        Font = Enum.Font.Gotham;
+        TextSize = 18;
+    }
+     
+     
+    local StarterGui = game:GetService("StarterGui")
+    local Players = game:GetService("Players")
+    local player = Players.LocalPlayer or Players:GetPropertyChangedSignal("LocalPlayer"):Wait() or Players.LocalPlayer
+    local saymsg = game:GetService("ReplicatedStorage"):WaitForChild("DefaultChatSystemChatEvents"):WaitForChild("SayMessageRequest")
+    local getmsg = game:GetService("ReplicatedStorage"):WaitForChild("DefaultChatSystemChatEvents"):WaitForChild("OnMessageDoneFiltering")
+    local instance = (_G.chatSpyInstance or 0) + 1
+    _G.chatSpyInstance = instance
+     
+    local function onChatted(p,msg)
+        if _G.chatSpyInstance == instance then
+            if p==player and msg:lower():sub(1,4)=="/spy" then
+                enabled = not enabled
+                wait(0.3)
+                privateProperties.Text = "{SPY "..(enabled and "EN" or "DIS").."ABLED}"
+                StarterGui:SetCore("ChatMakeSystemMessage",privateProperties)
+            elseif enabled and (spyOnMyself==true or p~=player) then
+                msg = msg:gsub("[\n\r]",''):gsub("\t",' '):gsub("[ ]+",' ')
+                local hidden = true
+                local conn = getmsg.OnClientEvent:Connect(function(packet,channel)
+                    if packet.SpeakerUserId==p.UserId and packet.Message==msg:sub(#msg-#packet.Message+1) and (channel=="All" or (channel=="Team" and public==false and Players[packet.FromSpeaker].Team==player.Team)) then
+                        hidden = false
+                    end
+                end)
+                wait(1)
+                conn:Disconnect()
+                if hidden and enabled then
+                    if public then
+                        saymsg:FireServer((publicItalics and "/me " or '').."{SPY} [".. p.Name .."]: "..msg,"All")
+                    else
+                        privateProperties.Text = "{SPY} [".. p.Name .."]: "..msg
+                        StarterGui:SetCore("ChatMakeSystemMessage",privateProperties)
+                    end
+                end
+            end
+        end
+    end
+     
+    for _,p in ipairs(Players:GetPlayers()) do
+        p.Chatted:Connect(function(msg) onChatted(p,msg) end)
+    end
+    Players.PlayerAdded:Connect(function(p)
+        p.Chatted:Connect(function(msg) onChatted(p,msg) end)
+    end)
+    privateProperties.Text = "{SPY "..(enabled and "EN" or "DIS").."ABLED}"
+    StarterGui:SetCore("ChatMakeSystemMessage",privateProperties)
+    if not player.PlayerGui:FindFirstChild("Chat") then wait(3) end
+    local chatFrame = player.PlayerGui.Chat.Frame
+    chatFrame.ChatChannelParentFrame.Visible = true
+    chatFrame.ChatBarParentFrame.Position = chatFrame.ChatChannelParentFrame.Position+UDim2.new(UDim.new(),chatFrame.ChatChannelParentFrame.Size.Y)
     local Players = game:GetService("Players")
 local Player = Players.LocalPlayer
 local PlayerGui = Player:WaitForChild("PlayerGui")
@@ -28,66 +88,6 @@ BubbleChatUI.DescendantAdded:Connect(function(Descendant)
         Descendant.TextColor3 = Color3.new(1,1,1)
     end
 end)
-    enabled = true --chat "/spy" to toggle!
-spyOnMyself = true --if true will check your messages too
-public = false --if true will chat the logs publicly (fun, risky)
-publicItalics = true --if true will use /me to stand out
-privateProperties = { --customize private logs
-	Color = Color3.fromRGB(255,0,0); 
-	Font = Enum.Font.Gotham;
-	TextSize = 18;
-}
- 
- 
-local StarterGui = game:GetService("StarterGui")
-local Players = game:GetService("Players")
-local player = Players.LocalPlayer or Players:GetPropertyChangedSignal("LocalPlayer"):Wait() or Players.LocalPlayer
-local saymsg = game:GetService("ReplicatedStorage"):WaitForChild("DefaultChatSystemChatEvents"):WaitForChild("SayMessageRequest")
-local getmsg = game:GetService("ReplicatedStorage"):WaitForChild("DefaultChatSystemChatEvents"):WaitForChild("OnMessageDoneFiltering")
-local instance = (_G.chatSpyInstance or 0) + 1
-_G.chatSpyInstance = instance
- 
-local function onChatted(p,msg)
-	if _G.chatSpyInstance == instance then
-		if p==player and msg:lower():sub(1,4)=="/spy" then
-			enabled = not enabled
-			wait(0.3)
-			privateProperties.Text = "{SPY "..(enabled and "EN" or "DIS").."ABLED}"
-			StarterGui:SetCore("ChatMakeSystemMessage",privateProperties)
-		elseif enabled and (spyOnMyself==true or p~=player) then
-			msg = msg:gsub("[\n\r]",''):gsub("\t",' '):gsub("[ ]+",' ')
-			local hidden = true
-			local conn = getmsg.OnClientEvent:Connect(function(packet,channel)
-				if packet.SpeakerUserId==p.UserId and packet.Message==msg:sub(#msg-#packet.Message+1) and (channel=="All" or (channel=="Team" and public==false and Players[packet.FromSpeaker].Team==player.Team)) then
-					hidden = false
-				end
-			end)
-			wait(1)
-			conn:Disconnect()
-			if hidden and enabled then
-				if public then
-					saymsg:FireServer((publicItalics and "/me " or '').."{SPY} [".. p.Name .."]: "..msg,"All")
-				else
-					privateProperties.Text = "{SPY} [".. p.Name .."]: "..msg
-					StarterGui:SetCore("ChatMakeSystemMessage",privateProperties)
-				end
-			end
-		end
-	end
-end
- 
-for _,p in ipairs(Players:GetPlayers()) do
-	p.Chatted:Connect(function(msg) onChatted(p,msg) end)
-end
-Players.PlayerAdded:Connect(function(p)
-	p.Chatted:Connect(function(msg) onChatted(p,msg) end)
-end)
-privateProperties.Text = "{SPY "..(enabled and "EN" or "DIS").."ABLED}"
-StarterGui:SetCore("ChatMakeSystemMessage",privateProperties)
-if not player.PlayerGui:FindFirstChild("Chat") then wait(3) end
-local chatFrame = player.PlayerGui.Chat.Frame
-chatFrame.ChatChannelParentFrame.Visible = true
-chatFrame.ChatBarParentFrame.Position = chatFrame.ChatChannelParentFrame.Position+UDim2.new(UDim.new(),chatFrame.ChatChannelParentFrame.Size.Y)
 
     local Settings = {
         Silent = false,
@@ -165,7 +165,6 @@ chatFrame.ChatBarParentFrame.Position = chatFrame.ChatChannelParentFrame.Positio
             fireclickdetector(game:GetService("Workspace").Ignored["Clean the shoes on the floor and come to me for cash"].ClickDetector)
         end
     end
-
     local Lib = loadstring(game:HttpGet"https://raw.githubusercontent.com/SpaceWareHub/SpaceWare/main/SpaceWareLib")()
     local Window = Lib:Window("Aspect", "Da Hood", Enum.KeyCode.RightControl)
     local Main = Window:Tab('Player')
@@ -177,6 +176,29 @@ chatFrame.ChatBarParentFrame.Position = chatFrame.ChatChannelParentFrame.Positio
     local Tps = Window:Tab('Teleports')
     local Farming = Window:Tab('Autofarm')
     local Scripts = Window:Tab("Scripts")
+    local Rage = Window:Tab("Rage")
+
+    Rage:Toggle('Speed',function(state)
+        Client.Toggles.WalkSpeed = state
+        if game.Players.LocalPlayer.Character:FindFirstChild('Animate') then
+            getsenv(game.Players.LocalPlayer.Character.Animate).checkingSPEED = function() return nil end
+        end
+        if Client.Toggles.WalkSpeed == true then
+            game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Client.Values.WalkSpeed
+        else
+            game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+        end
+    end)
+    Rage:Slider('Speed Value',16,60,0,function(num)
+        Client.Values.WalkSpeed = num
+        if Client.Toggles.WalkSpeed == true then
+            if game.Players.LocalPlayer.Character:FindFirstChild('Animate') then
+                getsenv(game.Players.LocalPlayer.Character.Animate).checkingSPEED = function() return nil end
+            end
+            game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Client.Values.WalkSpeed
+        end
+    end)
+    
 
     for _, v in pairs(workspace.Ignored.Shop:GetChildren()) do
         Autobuy:Button(v.Name, function()
@@ -497,27 +519,6 @@ end)
 
 Main:Line()
 
-Main:Toggle('WalkSpeed',function(state)
-    Client.Toggles.WalkSpeed = state
-    if game.Players.LocalPlayer.Character:FindFirstChild('Animate') then
-        getsenv(game.Players.LocalPlayer.Character.Animate).checkingSPEED = function() return nil end
-    end
-    if Client.Toggles.WalkSpeed == true then
-        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Client.Values.WalkSpeed
-    else
-        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
-    end
-end)
-Main:Slider('WalkSpeed Value',16,130,0,function(num)
-    Client.Values.WalkSpeed = num
-    if Client.Toggles.WalkSpeed == true then
-        if game.Players.LocalPlayer.Character:FindFirstChild('Animate') then
-            getsenv(game.Players.LocalPlayer.Character.Animate).checkingSPEED = function() return nil end
-        end
-        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Client.Values.WalkSpeed
-    end
-end)
-
     Main:Slider("Field Of View - Better View", 70, 140,0,function(t)
         game.Workspace.Camera.FieldOfView = t
     end)
@@ -716,26 +717,6 @@ end)
     ESP:Toggle('Name Esp', function(Bool)
         Settings.Names = Bool
     end)
-
-    local playerlist = {}
-
-    for i,v in pairs(game.Players:GetPlayers())do
-        if v ~= game.Players.LocalPlayer then
-            table.insert(playerlist,v.Name)
-        end
-
-        update(playerlist)
-        update2(playerlist)
-    end
-
-    Tps:Dropdown("Teleport To Player",playerlist, function(ok)
-        xdvalue = ok
-    end)
-
-    Tps:Button("Teleport", function()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[xdvalue].Character.HumanoidRootPart.CFrame 
-    end)
-    Tps:Line()
 
     Tps:Toggle('Teleport Tool - Click To Teleport', function(Tog)
         if Tog then
@@ -1206,18 +1187,7 @@ end)
     end
 
 elseif game.PlaceId == 5602055394 then
-    local Players = game:GetService("Players")
-local Player = Players.LocalPlayer
-local PlayerGui = Player:WaitForChild("PlayerGui")
-local BubbleChatUI = PlayerGui:WaitForChild("BubbleChat")
-BubbleChatUI.DescendantAdded:Connect(function(Descendant)
-    if Descendant:IsA("ImageLabel") then
-        Descendant.ImageColor3 = Color3.fromRGB(0, 0, 0)
-        Descendant.ImageTransparency = 0.3
-    elseif Descendant:IsA("TextLabel") then
-        Descendant.TextColor3 = Color3.new(1,1,1)
-    end
-end)
+
     enabled = true --chat "/spy" to toggle!
     spyOnMyself = true --if true will check your messages too
     public = false --if true will chat the logs publicly (fun, risky)
@@ -1278,6 +1248,20 @@ end)
     local chatFrame = player.PlayerGui.Chat.Frame
     chatFrame.ChatChannelParentFrame.Visible = true
     chatFrame.ChatBarParentFrame.Position = chatFrame.ChatChannelParentFrame.Position+UDim2.new(UDim.new(),chatFrame.ChatChannelParentFrame.Size.Y)
+
+    local Players = game:GetService("Players")
+local Player = Players.LocalPlayer
+local PlayerGui = Player:WaitForChild("PlayerGui")
+local BubbleChatUI = PlayerGui:WaitForChild("BubbleChat")
+BubbleChatUI.DescendantAdded:Connect(function(Descendant)
+    if Descendant:IsA("ImageLabel") then
+        Descendant.ImageColor3 = Color3.fromRGB(0, 0, 0)
+        Descendant.ImageTransparency = 0.3
+    elseif Descendant:IsA("TextLabel") then
+        Descendant.TextColor3 = Color3.new(1,1,1)
+    end
+end)
+
         local Settings = {
             Boxes = false,
             Names = false
@@ -1287,14 +1271,6 @@ end)
         local Camera = game:GetService("Workspace").CurrentCamera
         local Players = game:GetService("Players")
         local Player = Players.LocalPlayer
-        Client = {
-            Toggles = {
-                WalkSpeed = false
-            },
-            Values = {
-                Walkspeed = 16
-            }
-        }
         local Lib = loadstring(game:HttpGet"https://raw.githubusercontent.com/SpaceWareHub/SpaceWare/main/SpaceWareLib")()
         local Window = Lib:Window("Aspect", "Hood Modded", Enum.KeyCode.RightControl)
         local Main = Window:Tab('Player')
@@ -1359,131 +1335,35 @@ end)
         Main:Slider("Zoom Max Distance", 30, 10000,0,function(t)
             game:GetService("Players").LocalPlayer.CameraMaxZoomDistance = t
         end)
-
-        ESP:Toggle('Box Esp', function(Bool)
-            Settings.Boxes = Bool
-        end)
-
-        ESP:Line()
         
-        ESP:Toggle('Name Esp', function(Bool)
-            Settings.Names = Bool
-        end)
-        
-        function DrawText()
-            local Text = Drawing.new("Text")
-            Text.Color = Color3.fromRGB(190, 190, 0)
-            Text.Size = 20
-            Text.Outline = true
-            Text.Center = true
+        ESP:Button('Name Esp', function()
+            local gui = Instance.new("BillboardGui")
+            local esp = Instance.new("TextLabel",gui) ---- new instances to make the billboard gui and the textlabel
             
-            return Text
-        end
-        
-        function DrawSquare()
-            local Box = Drawing.new("Square")
-            Box.Color = Color3.fromRGB(190, 190, 0)
-            Box.Thickness = 0.5
-            Box.Filled = false
-            Box.Transparency = 1
+            gui.Name = "Cracked esp"; ---- properties of the esp
+            gui.ResetOnSpawn = false
+            gui.AlwaysOnTop = true;
+            gui.LightInfluence = 0;
+            gui.Size = UDim2.new(1.75, 0, 1.75, 0);
+            esp.BackgroundColor3 = Color3.fromRGB(255, 255, 255);
+            esp.Text = ""
+            esp.Size = UDim2.new(0.0001, 0.00001, 0.0001, 0.00001);
+            esp.BorderSizePixel = 4;
+            esp.BorderSizePixel = 0
+            esp.TextStrokeTransparency = 0
+            esp.TextStrokeColor3 = Color3.fromRGB(0,0,0)
+            esp.Font = "SourceSans"
+            esp.TextSize = 20
+            esp.TextColor3 = Color3.fromRGB(190,190,0) -- text colour
             
-            return Box
-        end
-        
-        function IsPlayerAlive(player)
-            if player.Character ~= nil and player.Character:FindFirstChild("HumanoidRootPart") then
-                return true
-            end
-            
-            return false
-        end
-        
-        function GetOffset(part, pos)
-            local FarPosition = Camera:WorldToViewportPoint(Vector3.new(part.Position.X, part.Position.Y + (part.Size.Y / 2), part.Position.Z))
-            
-            return FarPosition.Y - pos.Y
-        end
-        
-        function GetCorners(player)
-            local TopY = 69696969
-            local BottomY = -69696969
-            local RightX = -69696969
-            local LeftX = 69696969
-            local Offsets
-            local Positions = {}
-            
-            for i, v in next, player.Character:GetChildren() do
-                if v.ClassName == "MeshPart" or v.Name == "Head" then
-                    local Position, OnScreen = Camera:WorldToViewportPoint(v.Position)
-                    Positions[v.Name] = Position
-                    Offsets = GetOffset(v, Position)
-                    
-                    if OnScreen then
-                        if Position.Y < TopY then
-                            TopY = Position.Y
-                        end
-                        if Position.Y > BottomY then
-                            BottomY = Position.Y
-                        end
-                        if Position.X < LeftX then
-                            LeftX = Position.X
-                        end
-                        if Position.X > RightX then
-                            RightX = Position.X
-                        end
-                    end
+            game:GetService("RunService").RenderStepped:Connect(function() ---- loops faster than a while loop 🙂
+                for i,v in pairs (game:GetService("Players"):GetPlayers()) do
+                    if v ~= game:GetService("Players").LocalPlayer and v.Character.Head:FindFirstChild("Cracked esp")==nil  then -- craeting checks for team check, local player etc
+                        esp.Text = "{"..v.Name.."}"
+                        gui:Clone().Parent = v.Character.Head
                 end
             end
-        
-            return {TopLeft = Vector2.new(LeftX + Offsets, TopY + Offsets), TopRight = Vector2.new(RightX - Offsets, TopY + Offsets), BottomLeft = Vector2.new(LeftX + Offsets, BottomY - Offsets), BottomRight = Vector2.new(RightX - Offsets, BottomY - Offsets), Positions = Positions}
-        end
-        
-        function AddEsp(player)
-            local Box = DrawSquare()
-            local Name = DrawText()
-          
-            RunService.Stepped:Connect(function()
-                IsAlive = IsPlayerAlive(player)
-                
-                if IsAlive and player.Character:FindFirstChild("HumanoidRootPart") then
-                    local Corners = GetCorners(player)
-                    local Positions = Corners.Positions
-                    local xDist = Corners.BottomRight.X - Corners.TopLeft.X
-                    local yDist = Corners.BottomRight.Y - Corners.TopLeft.Y
-                    local RootPosition, OnScreen = Camera:WorldToViewportPoint(player.Character.HumanoidRootPart.Position)
-              
-                    if Settings.Boxes then
-                        Box.Visible = OnScreen
-                        Box.Size = Vector2.new(xDist, yDist)
-                        Box.Position = Corners.TopLeft
-                    else
-                        Box.Visible = false
-                    end
-                    if Settings.Names then
-                        Name.Visible = OnScreen
-                        Name.Position = Vector2.new(Corners.BottomRight.X - (xDist / 2), Corners.TopLeft.Y - 45)
-                        Name.Text = "[ " .. player.Name .. " ]"
-                    else
-                        Name.Visible = false
-                    end
-                else
-                    DisplayName.Visible = false
-                    Box.Visible = false
-                    Name.Visible = false
-                end
             end)
-        end
-        
-        for i, v in pairs(Players:GetPlayers()) do
-            if v ~= Player then
-                AddEsp(v)
-            end
-        end
-        
-        Players.PlayerAdded:Connect(function(player)
-            if v ~= Player then
-                AddEsp(player)
-            end
         end)
 end
 
