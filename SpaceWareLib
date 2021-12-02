@@ -76,7 +76,6 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 	local BackgroundList6 = Instance.new("TextLabel")
 	local BackgroundList7 = Instance.new("TextLabel")
 	local BackgroundList8 = Instance.new("TextLabel")
-	local BackgroundList9 = Instance.new("TextLabel")
 	local SupportedGlow = Instance.new("Frame")
 	local SupportedFrameGlow1 = Instance.new("ImageLabel")
 	local SupportedFrameGlow2 = Instance.new("ImageLabel")
@@ -311,18 +310,6 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 	BackgroundList8.TextColor3 = Color3.fromRGB(255, 255, 255)
 	BackgroundList8.TextSize = 14.000
 	BackgroundList8.TextTransparency = 1.000
-	
-	BackgroundList9.Name = "BackgroundList9"
-	BackgroundList9.Parent = BackgroundS
-	BackgroundList9.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	BackgroundList9.BackgroundTransparency = 1.000
-	BackgroundList9.Position = UDim2.new(0.0708154514, 0, 0, 0)
-	BackgroundList9.Size = UDim2.new(0, 200, 0, 18)
-	BackgroundList9.Font = Enum.Font.Gotham
-	BackgroundList9.Text = "Hellreaver"
-	BackgroundList9.TextColor3 = Color3.fromRGB(255, 255, 255)
-	BackgroundList9.TextSize = 14.000
-	BackgroundList9.TextTransparency = 1.000
 
 	SupportedGlow.Name = "SupportedGlow"
 	SupportedGlow.Parent = SupportedFrame
@@ -452,11 +439,7 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 			TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
 			{TextTransparency = 0}
 		):Play()
-		TweenService:Create(
-			BackgroundList9,
-			TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-			{TextTransparency = 0}
-		):Play()
+		
 		
 		
 		
@@ -571,11 +554,6 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 			):Play()
 			TweenService:Create(
 				BackgroundList8,
-				TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-				{TextTransparency = 1}
-			):Play()
-			TweenService:Create(
-				BackgroundList9,
 				TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
 				{TextTransparency = 1}
 			):Play()
@@ -1294,7 +1272,27 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 					{BackgroundColor3 = Color3.fromRGB(29, 26, 53)}
 				):Play()
 			end)
+			
+			Button.MouseEnter:Connect(
+				function(enter)
+					TweenService:Create(
+						Button,
+						TweenInfo.new(.3, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
+						{BackgroundColor3 = Color3.fromRGB(33, 31, 56)}
+					):Play()
+				end
+			)
 
+			Button.MouseLeave:Connect(
+				function(enter)
+					TweenService:Create(
+						Button,
+						TweenInfo.new(.3, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
+						{BackgroundColor3 = Color3.fromRGB(29, 26, 53)}
+					):Play()
+				end
+			)
+			
 			ButtonTitle.Name = "ButtonTitle"
 			ButtonTitle.Parent = Button
 			ButtonTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -1344,7 +1342,27 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 					):Play()
 				end
 			end)
+			
+			ToggleBtn.MouseEnter:Connect(
+				function(enter)
+					TweenService:Create(
+						ToggleBtn,
+						TweenInfo.new(.3, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
+						{BackgroundColor3 = Color3.fromRGB(33, 31, 56)}
+					):Play()
+				end
+			)
 
+			ToggleBtn.MouseLeave:Connect(
+				function(enter)
+					TweenService:Create(
+						ToggleBtn,
+						TweenInfo.new(.3, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
+						{BackgroundColor3 = Color3.fromRGB(29, 26, 53)}
+					):Play()
+				end
+			)
+			
 			ToggleTitle.Name = "ToggleTitle"
 			ToggleTitle.Parent = ToggleBtn
 			ToggleTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -1395,6 +1413,26 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 			Slider.TextColor3 = Color3.fromRGB(0, 0, 0)
 			Slider.TextSize = 14.000
 			Slider.BorderSizePixel = 0
+			
+			Slider.MouseEnter:Connect(
+				function(enter)
+					TweenService:Create(
+						Slider,
+						TweenInfo.new(.3, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
+						{BackgroundColor3 = Color3.fromRGB(33, 31, 56)}
+					):Play()
+				end
+			)
+
+			Slider.MouseLeave:Connect(
+				function(enter)
+					TweenService:Create(
+						Slider,
+						TweenInfo.new(.3, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
+						{BackgroundColor3 = Color3.fromRGB(29, 26, 53)}
+					):Play()
+				end
+			)
 
 			SliderTitle.Name = "SliderTitle"
 			SliderTitle.Parent = Slider
@@ -1593,6 +1631,26 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 			Dropdown.TextColor3 = Color3.fromRGB(195, 195, 195)
 			Dropdown.TextSize = 14.000
 
+			Dropdown.MouseEnter:Connect(
+				function(enter)
+					TweenService:Create(
+						Dropdown,
+						TweenInfo.new(.3, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
+						{BackgroundColor3 = Color3.fromRGB(33, 31, 56)}
+					):Play()
+				end
+			)
+
+			Dropdown.MouseLeave:Connect(
+				function(enter)
+					TweenService:Create(
+						Dropdown,
+						TweenInfo.new(.3, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
+						{BackgroundColor3 = Color3.fromRGB(29, 26, 53)}
+					):Play()
+				end
+			)
+
 			DropdownTitle.Name = "DropdownTitle"
 			DropdownTitle.Parent = Dropdown
 			DropdownTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -1609,14 +1667,14 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 			DropToggle.Name = "DropToggle"
 			DropToggle.Parent = Dropdown
 			DropToggle.BackgroundTransparency = 1.000
-			DropToggle.Position = UDim2.new(0.926, 0,0.195, 0)
-			DropToggle.Size = UDim2.new(0, 21, 0, 21)
+			DropToggle.Position = UDim2.new(0.926, 0,0.135, 0)
+			DropToggle.Size = UDim2.new(0, 23, 0, 23)
 			DropToggle.ZIndex = 2
-			DropToggle.Rotation = 0
-			DropToggle.Image = "rbxassetid://3926307971"
+			DropToggle.Rotation = 90
+			DropToggle.Image = "rbxassetid://5844057859"
 			DropToggle.ImageColor3 = Color3.fromRGB(255, 255, 255)
-			DropToggle.ImageRectOffset = Vector2.new(324, 364)
-			DropToggle.ImageRectSize = Vector2.new(36, 36)
+			DropToggle.ImageRectOffset = Vector2.new(0, 0)
+			DropToggle.ImageRectSize = Vector2.new(0, 0)
 
 			local DropItemHolder = Instance.new("ScrollingFrame")
 			local DropItemHolderUIList = Instance.new("UIListLayout")
@@ -1650,7 +1708,7 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 						TweenService:Create(
 							DropToggle,
 							TweenInfo.new(.3, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-							{Rotation = 360}
+							{Rotation = 0}
 						):Play()
 						DropdownTitle.Text = Selected
 						DropItemHolder.Visible = true
@@ -1670,7 +1728,7 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 						TweenService:Create(
 							DropToggle,
 							TweenInfo.new(.3, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-							{Rotation = 0}
+							{Rotation = 90}
 						):Play()
 						DropdownTitle.Text = text
 						DropItemHolder:TweenSize(
@@ -1752,7 +1810,7 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 						TweenService:Create(
 							DropToggle,
 							TweenInfo.new(.3, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-							{Rotation = 0}
+							{Rotation = 90}
 						):Play()
 						DropdownTitle.Text = text
 						Selected = v
@@ -1805,7 +1863,27 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 			Colorpicker.Text = ""
 			Colorpicker.TextColor3 = Color3.fromRGB(195, 195, 195)
 			Colorpicker.TextSize = 14.000
+			
+			Colorpicker.MouseEnter:Connect(
+				function(enter)
+					TweenService:Create(
+						Colorpicker,
+						TweenInfo.new(.3, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
+						{BackgroundColor3 = Color3.fromRGB(33, 31, 56)}
+					):Play()
+				end
+			)
 
+			Colorpicker.MouseLeave:Connect(
+				function(enter)
+					TweenService:Create(
+						Colorpicker,
+						TweenInfo.new(.3, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
+						{BackgroundColor3 = Color3.fromRGB(29, 26, 53)}
+					):Play()
+				end
+			)
+			
 			ColorPickerTitle.Name = "ColorPickerTitle"
 			ColorPickerTitle.Parent = Colorpicker
 			ColorPickerTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
