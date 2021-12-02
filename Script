@@ -1,3 +1,5 @@
+-- Main Script
+
 if game.CoreGui:FindFirstChild("Library") then
     return game.StarterGui:SetCore("SendNotification", {
       Title = "ALREADY EXECUTED",
@@ -198,7 +200,6 @@ end)
             game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Client.Values.WalkSpeed
         end
     end)
-    
 
     for _, v in pairs(workspace.Ignored.Shop:GetChildren()) do
         Autobuy:Button(v.Name, function()
@@ -603,6 +604,16 @@ Main:Line()
             end
         end)
 end)
+
+Main:Toggle("Fog", function(state)
+    if state then
+        game.Lighting.FogStart = 9999999999
+    else
+        game.Lighting.FogStart = 0
+    end
+end)
+
+Main:Line()
 
 Main:Button("Force Reset", function()
     for i, v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
@@ -1308,6 +1319,14 @@ end)
             end
             end
             mouse.KeyDown:Connect(roast)
+        end)
+
+        Main:Toggle("Fog", function(state)
+            if state then
+                game.Lighting.FogStart = 9999999999
+            else
+                game.Lighting.FogStart = 0
+            end
         end)
         
         ESP:Button('Name Esp', function()
