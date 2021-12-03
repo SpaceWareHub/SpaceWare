@@ -586,40 +586,31 @@ Main:Line()
                 end
             end
         end
-    end)
-
- Main:Button("Auto Stomp [C]", function()
-        autostomp = false
-        game:GetService("RunService").Stepped:connect(function()
-            if autostomp then
-                game.ReplicatedStorage.MainEvent:FireServer("Stomp")
-            end
-        end)
-        plr = game.Players.LocalPlayer
-        mouse = plr:GetMouse()
-        mouse.KeyDown:connect(function(key)
-            if key == "h" then
-                autostomp = not autostomp
-                game.ReplicatedStorage.MainEvent:FireServer("Stomp")
-            end
-        end)
 end)
+
+Main:Line()
+
+Main:Button("Anti Slow - ON", function()
+    _G.autoSlow = true;
+    while _G.autoSlow do
+        local player = game.Players.LocalPlayer
+        local DeletePart = player.Character.BodyEffects.Movement
+        if DeletePart then DeletePart.Parent = game.Workspace.Camera end
+        wait()
+    end
+end)
+
+Main:Button("Anti Slow - OFF", function()
+    _G.autoSlow = false;
+end)
+
+Main:Line()
 
 Main:Toggle("Fog", function(state)
     if state then
         game.Lighting.FogStart = 9999999999
     else
         game.Lighting.FogStart = 0
-    end
-end)
-
-Main:Line()
-
-Main:Button("Force Reset", function()
-    for i, v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
-        if v:IsA("BasePart") then
-            v:Destroy()
-        end
     end
 end)
 
@@ -639,6 +630,20 @@ Main:Button("Auto Roast [Y]", function()
     end
     end
     mouse.KeyDown:Connect(roast)
+end)
+
+Main:Button("Headless", function()
+    local player = game.Players.LocalPlayer
+    player.Character.Head:BreakJoints()
+    player.Character.Head.Position = Vector3.new(0,999999999999,0)
+end)
+
+Main:Button("Force Reset", function()
+    for i, v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+        if v:IsA("BasePart") then
+            v:Destroy()
+        end
+    end
 end)
 
     game.Players.LocalPlayer.Character.Humanoid:GetPropertyChangedSignal("WalkSpeed"):Connect(function()
@@ -1319,6 +1324,12 @@ end)
             end
             end
             mouse.KeyDown:Connect(roast)
+        end)
+
+        Main:Button("Headless", function()
+            local player = game.Players.LocalPlayer
+            player.Character.Head:BreakJoints()
+            player.Character.Head.Position = Vector3.new(0,999999999999,0)
         end)
 
         Main:Toggle("Fog", function(state)
