@@ -932,8 +932,8 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 	Title.Parent = MainFrame
 	Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	Title.BackgroundTransparency = 1.000
-	Title.Position = UDim2.new(0.121212125, 0, 0.0090634441, 0)
-	Title.Size = UDim2.new(0, 214, 0, 43)
+	Title.Position = UDim2.new(0.13, 0,0.009, 0)
+	Title.Size = UDim2.new(0, 210, 0, 43)
 	Title.Font = Enum.Font.Gotham
 	Title.Text = "| " .. Htitle .. " |"
 	Title.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -1026,7 +1026,7 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 				TweenInfo.new(.35, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
 				{Rotation = 270}
 			):Play()
-			wait(.36)
+			wait(.35)
 			ShadowFrame.Visible = false
 		end
 	end)
@@ -1150,7 +1150,7 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 					TweenService:Create(
 						v,
 						TweenInfo.new(.35, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-						{Size = UDim2.new(0, 0,0, 263)}
+						{Size = UDim2.new(0, 393,0, 0)}
 					):Play()
 					v.ScrollBarThickness = 0
 				end 
@@ -1218,7 +1218,7 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 		NewPages.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 		NewPages.BackgroundTransparency = 1.000
 		NewPages.BorderSizePixel = 0
-		NewPages.Size = UDim2.new(0, 0,0, 263)
+		NewPages.Size = UDim2.new(0, 393,0, 0)
 		NewPages.Position = UDim2.new(-0.004, 0,0.01, 0)
 		NewPages.ScrollBarThickness = 0
 		NewPages.ScrollBarImageTransparency = 0
@@ -1759,7 +1759,7 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 				Option.BorderSizePixel = 0
 				Option.BorderColor3 = Color3.fromRGB(24, 21, 48)
 				Option.Position = UDim2.new(0.494680852, 0, 0.147959188, 0)
-				Option.Size = UDim2.new(0, 375, 0, 28)
+				Option.Size = UDim2.new(0, 375, 0, 40)
 				Option.AutoButtonColor = false
 				Option.Font = Enum.Font.Gotham
 				Option.TextColor3 = Color3.fromRGB(195, 195, 195)
