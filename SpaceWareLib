@@ -76,6 +76,7 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 	local BackgroundList6 = Instance.new("TextLabel")
 	local BackgroundList7 = Instance.new("TextLabel")
 	local BackgroundList8 = Instance.new("TextLabel")
+	local BackgroundList9 = Instance.new("TextLabel")
 	local SupportedGlow = Instance.new("Frame")
 	local SupportedFrameGlow1 = Instance.new("ImageLabel")
 	local SupportedFrameGlow2 = Instance.new("ImageLabel")
@@ -310,7 +311,19 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 	BackgroundList8.TextColor3 = Color3.fromRGB(255, 255, 255)
 	BackgroundList8.TextSize = 14.000
 	BackgroundList8.TextTransparency = 1.000
-
+	
+	BackgroundList9.Name = "BackgroundList9"
+	BackgroundList9.Parent = BackgroundS
+	BackgroundList9.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	BackgroundList9.BackgroundTransparency = 1.000
+	BackgroundList9.Position = UDim2.new(0.0708154514, 0, 0, 0)
+	BackgroundList9.Size = UDim2.new(0, 200, 0, 18)
+	BackgroundList9.Font = Enum.Font.Gotham
+	BackgroundList9.Text = "Hellreaver"
+	BackgroundList9.TextColor3 = Color3.fromRGB(255, 255, 255)
+	BackgroundList9.TextSize = 14.000
+	BackgroundList9.TextTransparency = 1.000
+	
 	SupportedGlow.Name = "SupportedGlow"
 	SupportedGlow.Parent = SupportedFrame
 	SupportedGlow.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -439,7 +452,11 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 			TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
 			{TextTransparency = 0}
 		):Play()
-		
+		TweenService:Create(
+			BackgroundList9,
+			TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
+			{TextTransparency = 0}
+		):Play()
 		
 		
 		
@@ -554,6 +571,11 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 			):Play()
 			TweenService:Create(
 				BackgroundList8,
+				TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
+				{TextTransparency = 1}
+			):Play()
+			TweenService:Create(
+				BackgroundList9,
 				TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
 				{TextTransparency = 1}
 			):Play()
@@ -1759,7 +1781,7 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 				Option.BorderSizePixel = 0
 				Option.BorderColor3 = Color3.fromRGB(24, 21, 48)
 				Option.Position = UDim2.new(0.494680852, 0, 0.147959188, 0)
-				Option.Size = UDim2.new(0, 375, 0, 40)
+				Option.Size = UDim2.new(0, 375, 0, 30)
 				Option.AutoButtonColor = false
 				Option.Font = Enum.Font.Gotham
 				Option.TextColor3 = Color3.fromRGB(195, 195, 195)
