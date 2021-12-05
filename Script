@@ -169,16 +169,20 @@ end)
     end
     local Lib = loadstring(game:HttpGet"https://raw.githubusercontent.com/SpaceWareHub/SpaceWare/main/SpaceWareLib")()
     local Window = Lib:Window("Aspect", "Da Hood", Enum.KeyCode.RightControl)
+    local Main2 = Window:TabLine('Main')
     local Main = Window:Tab('Player')
-    local Aimlock = Window:Tab("Aimlock")
-    local Silent = Window:Tab("Silent Aim")
+    local Animation = Window:Tab("Animation")
     local ESP = Window:Tab("ESP")
     local Autobuy = Window:Tab("AutoBuy")
-    local Animation = Window:Tab("Animation")
-    local Tps = Window:Tab('Teleports')
-    local Farming = Window:Tab('Autofarm')
-    local Scripts = Window:Tab("Scripts")
     local Rage = Window:Tab("Rage")
+    local Tps = Window:Tab('Teleports')
+    local LockAndSilent = Window:TabLine('Lock & Silent')
+    local Aimlock = Window:Tab("Aimlock")
+    local Silent = Window:Tab("Silent Aim")
+    local Other = Window:TabLine('Other')
+    local Scripts = Window:Tab("Scripts")
+    local Farm = Window:TabLine('FARM')
+    local Farming = Window:Tab('Autofarm')
 
     Rage:Toggle('Speed',function(state)
         Client.Toggles.WalkSpeed = state
@@ -1243,6 +1247,7 @@ end)
         local Player = Players.LocalPlayer
         local Lib = loadstring(game:HttpGet"https://raw.githubusercontent.com/SpaceWareHub/SpaceWare/main/SpaceWareLib")()
         local Window = Lib:Window("Aspect", "Hood Modded", Enum.KeyCode.RightControl)
+        local Main2 = Window:TabLine('Main')
         local Main = Window:Tab('Player')
         local Aimlock = Window:Tab("Aimlock")
         local ESP = Window:Tab("ESP")
@@ -1390,7 +1395,9 @@ end)
 
     local Coastified = loadstring(game:HttpGet"https://raw.githubusercontent.com/SpaceWareHub/SpaceWare/main/SpaceWareLib")()
     local win = Coastified:Window("Aspect", "Tower Of Hell", Enum.KeyCode.RightControl)
-    local MainWindow = win:Tab("Main")
+    local Main = win:TabLine('Main')
+    local MainWindow = win:Tab("Player")
+    local Mutators = win:TabLine('Mutators')
     local MainWindow2 = win:Tab("Mutators")
     TimeAlive = 0
     
@@ -1429,6 +1436,10 @@ end)
         end
         Me.KillScript.Disabled = Old
     end)
+
+    MainWindow:Slider('WalkSpeed', 16, 150,0,function(val)
+        game:GetService("ReplicatedStorage").globalSpeed.Value = val
+    end)
     
     MainWindow:Button('Get All Items',function()
         for i,v in pairs(game:GetService("ReplicatedStorage").Gear:GetChildren()) do
@@ -1453,7 +1464,8 @@ end)
             require(game:GetService("ReplicatedStorage").Mutators.invincibility).revert()
         end
     end)
-    MainWindow2:Toggle('Double Coins',function(state)
+    MainWindow2:Line('If You Die Turn Off And On Double Coin Again')
+    MainWindow2:Toggle('Double Coin',function(state)
         if state == true then
             require(game:GetService("ReplicatedStorage").Mutators["double coins"]).mutate()
         else
@@ -1469,15 +1481,19 @@ end)
         end
     end)
     
-    MainWindow2:Slider('High Speed', 16, 150,0,function(val)
-        game:GetService("ReplicatedStorage").globalSpeed.Value = val
-    end)
-    
     MainWindow2:Toggle('Low Gravity',function(state)
         if state == true then
             require(game:GetService("ReplicatedStorage").Mutators.gravity).mutate()
         else
             require(game:GetService("ReplicatedStorage").Mutators.gravity).revert()
+        end
+    end)
+
+    MainWindow2:Toggle('Speed',function(state)
+        if state == true then
+            require(game:GetService("ReplicatedStorage").Mutators.speed).mutate()
+        else
+            require(game:GetService("ReplicatedStorage").Mutators.speed).revert()
         end
     end)
     
@@ -1663,10 +1679,12 @@ if setreadonly then setreadonly(mt, false) else make_writeable(mt, true) end
 
 local lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/SpaceWareHub/SpaceWare/main/SpaceWareLib"))()
 main = lib:Window("Aspect", "Strucid", Enum.KeyCode.RightControl)
+local Main = Window:TabLine('Main')
 Aimbot = main:Tab('Aimbot')
 LPTab = main:Tab('LocalPlayer')
 Esp = main:Tab('Visuals')
 GunMods = main:Tab('Gun Mods')
+local Main = Window:TabLine('Other')
 Fun = main:Tab('Fun')
 
 
@@ -2506,9 +2524,11 @@ end)
     
     local lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/SpaceWareHub/SpaceWare/main/SpaceWareLib"))()
     main = lib:Window("Aspect", "Murder Mystery 2", Enum.KeyCode.RightControl)
+    local Main = main:TabLine('Main')
     Mainz = main:Tab('Combat')
     Character = main:Tab('Character')
     Visual = main:Tab('Visuals')
+    local Main = main:TabLine('Trolling')
     Trolling = main:Tab('Troll')
     
     
@@ -2927,6 +2947,7 @@ end)
     end
     local lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/SpaceWareHub/SpaceWare/main/SpaceWareLib",true))()
     main = lib:Window("Aspect", "Broken Bones IV", Enum.KeyCode.RightControl)
+    local Main = main:TabLine('Main')
     MainWindow = main:Tab('Cash')
     MainWindow:Button('Give 10k Cash',function()
         GiveMoney(10000)
@@ -2962,6 +2983,7 @@ if game.PlaceId == 370731277 then
 
 local lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/SpaceWareHub/SpaceWare/main/SpaceWareLib"))()
 main = lib:Window("Aspect", "Meepcity", Enum.KeyCode.RightControl)
+local Main = Window:TabLine('Farm')
 local Farming_Tab = main:Tab('Farming')
 Client = {
 	Toggles = {
@@ -3038,6 +3060,7 @@ getgenv().AutoSuperUpgradesPetSlots = false;
 local DarkLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/SpaceWareHub/SpaceWare/main/SpaceWareLib"))()
 local s = DarkLib:Window("Aspect", "Clicker Madness", Enum.KeyCode.RightControl)
 -- Auto Farm Clicks Toggle
+local Main = s:TabLine('Farm')
 local ss = s:Tab("Farming")
 ss:Label("Farming Settings:")
 ss:Toggle("Auto Farm Clicks", function(bool)
@@ -3398,6 +3421,7 @@ end)
 end
 ------------------------------------------------------------------------------------------------------------
 -- Worlds Section
+local Main1 = s:TabLine('Teleport')
 local sss = s:Tab("Worlds")
 
 sss:Button("All Portals",function()
@@ -3496,6 +3520,7 @@ end)
 
 ------------------------------------------------------------------------------------------------------------
 -- Player Section
+local Main5 = Window:TabLine('Character')
 local ssss = s:Tab("Player")
 ssss:Slider("WalkSpeed",16,500,0,function(v)
     game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = (v)
@@ -3515,6 +3540,7 @@ if game.PlaceId == 5523314295 then
         }
     }
     
+    local Main2 = main:TabLine('Main')
     local Main = main:Tab("Main")
     Main:Toggle('Silent Aim',function(state)
         Client.Toggles.SilentAim = state
