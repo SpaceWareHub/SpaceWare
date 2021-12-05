@@ -2321,7 +2321,7 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 		TabLine.Font = Enum.Font.GothamSemibold
 		TabLine.Text = txt
 		TabLine.TextColor3 = Color3.fromRGB(255, 255, 255)
-		TabLine.TextSize = 15.000
+		TabLine.TextSize = 14.000
 		TabLine.TextWrapped = true
 		TabLine.TextXAlignment = Enum.TextXAlignment.Left
 	end
