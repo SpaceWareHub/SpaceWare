@@ -1137,7 +1137,7 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 
 	local Tabs = {}
 
-	function Tabs:Tab(tabname, SearchBarIncluded)
+	function Tabs:Tab(tabname)
 		local tabname = tabname or "New Tab"
 		local TabBtn = Instance.new("TextButton")
 		local TabBtnGradient = Instance.new("UIGradient")
@@ -1257,6 +1257,24 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 		ElementPadding.Name = "ElementPadding"
 		ElementPadding.Parent = NewPages
 		ElementPadding.PaddingRight = UDim.new(0, 10)
+		
+		function Tabs:TabLine(txt)
+			local TabLine = Instance.new("TextLabel")
+
+			TabLine.Name = "TabLine"
+			TabLine.Parent = AllTabs
+			TabLine.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			TabLine.BackgroundTransparency = 1.000
+			TabLine.Position = UDim2.new(0.081368126, 0, 0.168604657, 0)
+			TabLine.Size = UDim2.new(0, 116, 0, 28)
+			TabLine.ZIndex = 3
+			TabLine.Font = Enum.Font.GothamSemibold
+			TabLine.Text = txt
+			TabLine.TextColor3 = Color3.fromRGB(255, 255, 255)
+			TabLine.TextSize = 15.000
+			TabLine.TextWrapped = true
+			TabLine.TextXAlignment = Enum.TextXAlignment.Left
+		end
 
 		local ElementHandler = {}
 
@@ -1598,6 +1616,7 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 			Line.BorderSizePixel = 0
 			Line.Position = UDim2.new(0.0241935477, 0, 0.4375, 0)
 			Line.Size = UDim2.new(0, 365, 0, 1)
+			Line.BackgroundTransparency = 0.1
 
 			LineList.Name = "LineList"
 			LineList.Parent = LineFrame
