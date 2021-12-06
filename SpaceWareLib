@@ -53,612 +53,6 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 	local MainFrameCorner = Instance.new("UICorner")
 	local LeftFrameCorner = Instance.new("UICorner")
 	local LeftFrameLine = Instance.new("Frame")
-	local Loading = Instance.new("ScreenGui")
-	local LoadingFrame = Instance.new("Frame")
-	local LoadingFrameCorner = Instance.new("UICorner")
-	local LoadingFrameTitle = Instance.new("TextLabel")
-	local Background = Instance.new("Frame")
-	local BackgroundTitle = Instance.new("TextLabel")
-	local BackgroundBtn = Instance.new("TextButton")
-	local BackgroundBtnTitle = Instance.new("TextLabel")
-	local LoadingGlow = Instance.new("Frame")
-	local LoadingFrameGlow1 = Instance.new("ImageLabel")
-	local LoadingFrameGlow2 = Instance.new("ImageLabel")
-	local SupportedFrame = Instance.new("Frame")
-	local SupportedCorner = Instance.new("UICorner")
-	local BackgroundS = Instance.new("Frame")
-	local BackgroundSlist = Instance.new("UIListLayout")
-	local BackgroundList1 = Instance.new("TextLabel")
-	local BackgroundList2 = Instance.new("TextLabel")
-	local BackgroundList3 = Instance.new("TextLabel")
-	local BackgroundList4 = Instance.new("TextLabel")
-	local BackgroundList5 = Instance.new("TextLabel")
-	local BackgroundList6 = Instance.new("TextLabel")
-	local BackgroundList7 = Instance.new("TextLabel")
-	local BackgroundList8 = Instance.new("TextLabel")
-	local BackgroundList9 = Instance.new("TextLabel")
-	local SupportedGlow = Instance.new("Frame")
-	local SupportedFrameGlow1 = Instance.new("ImageLabel")
-	local SupportedFrameGlow2 = Instance.new("ImageLabel")
-	local SupportedTitle = Instance.new("TextLabel")
-
-	Loading.Name = "Loading"
-	Loading.Parent = game.CoreGui
-	Loading.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-
-	LoadingFrame.Name = "LoadingFrame"
-	LoadingFrame.Parent = Loading
-	LoadingFrame.AnchorPoint = Vector2.new(0.5, 0.5)
-	LoadingFrame.BackgroundColor3 = Color3.fromRGB(21, 18, 45)
-	LoadingFrame.BackgroundTransparency = 1.000
-	LoadingFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
-	LoadingFrame.Size = UDim2.new(0, 360, 0, 164)
-
-	LoadingFrameCorner.CornerRadius = UDim.new(0, 4)
-	LoadingFrameCorner.Name = "LoadingFrameCorner"
-	LoadingFrameCorner.Parent = LoadingFrame
-
-	LoadingFrameTitle.Name = "LoadingFrameTitle"
-	LoadingFrameTitle.Parent = LoadingFrame
-	LoadingFrameTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	LoadingFrameTitle.BackgroundTransparency = 1.000
-	LoadingFrameTitle.Position = UDim2.new(0, 0, 0.0769281536, 0)
-	LoadingFrameTitle.Size = UDim2.new(0, 360, 0, 34)
-	LoadingFrameTitle.Font = Enum.Font.Gotham
-	LoadingFrameTitle.Text = "| " .. Htitle .. " |"
-	LoadingFrameTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
-	LoadingFrameTitle.TextSize = 19.000
-	LoadingFrameTitle.TextTransparency = 1.000
-
-	Background.Name = "Background"
-	Background.Parent = LoadingFrame
-	Background.AnchorPoint = Vector2.new(0.5, 0.5)
-	Background.BackgroundColor3 = Color3.fromRGB(24, 21, 48)
-	Background.BackgroundTransparency = 1.000
-	Background.BorderSizePixel = 0
-	Background.Position = UDim2.new(0.498179615, 0, 0.661566317, 0)
-	Background.Size = UDim2.new(0, 345, 0, 101)
-
-	BackgroundTitle.Name = "BackgroundTitle"
-	BackgroundTitle.Parent = Background
-	BackgroundTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	BackgroundTitle.BackgroundTransparency = 1.000
-	BackgroundTitle.Position = UDim2.new(0.00217391318, 0, 0.136312664, 0)
-	BackgroundTitle.Size = UDim2.new(0, 345, 0, 34)
-	BackgroundTitle.Font = Enum.Font.Gotham
-	BackgroundTitle.Text = "Supported - " .. GMtitle
-	BackgroundTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
-	BackgroundTitle.TextSize = 19.000
-	BackgroundTitle.TextTransparency = 1.000
-
-	BackgroundBtn.Name = "BackgroundBtn"
-	BackgroundBtn.Parent = Background
-	BackgroundBtn.Active = false
-	BackgroundBtn.BackgroundColor3 = Color3.fromRGB(29, 26, 53)
-	BackgroundBtn.BackgroundTransparency = 1.000
-	BackgroundBtn.BorderSizePixel = 0
-	BackgroundBtn.Position = UDim2.new(0.0109999999, 0, 0.629999995, 0)
-	BackgroundBtn.Size = UDim2.new(0, 336, 0, 32)
-	BackgroundBtn.AutoButtonColor = false
-	BackgroundBtn.Font = Enum.Font.SourceSans
-	BackgroundBtn.Text = ""
-	BackgroundBtn.TextColor3 = Color3.fromRGB(0, 0, 0)
-	BackgroundBtn.TextSize = 14.000
-
-	BackgroundBtnTitle.Name = "BackgroundBtnTitle"
-	BackgroundBtnTitle.Parent = BackgroundBtn
-	BackgroundBtnTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	BackgroundBtnTitle.BackgroundTransparency = 1.000
-	BackgroundBtnTitle.Size = UDim2.new(1, 0, 1, 0)
-	BackgroundBtnTitle.Font = Enum.Font.Gotham
-	BackgroundBtnTitle.Text = "Load"
-	BackgroundBtnTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
-	BackgroundBtnTitle.TextSize = 14.000
-	BackgroundBtnTitle.TextTransparency = 1.000
-
-	LoadingGlow.Name = "LoadingGlow"
-	LoadingGlow.Parent = LoadingFrame
-	LoadingGlow.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	LoadingGlow.BackgroundTransparency = 1.000
-	LoadingGlow.Size = UDim2.new(1, 0, 1, 0)
-	LoadingGlow.ZIndex = 0
-
-	LoadingFrameGlow1.Name = "LoadingFrameGlow1"
-	LoadingFrameGlow1.Parent = LoadingGlow
-	LoadingFrameGlow1.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-	LoadingFrameGlow1.BackgroundTransparency = 1.000
-	LoadingFrameGlow1.Position = UDim2.new(0, -15, 0, -15)
-	LoadingFrameGlow1.Size = UDim2.new(1, 30, 1, 30)
-	LoadingFrameGlow1.ZIndex = 0
-	LoadingFrameGlow1.Image = "rbxassetid://5554236805"
-	LoadingFrameGlow1.ImageColor3 = Color3.fromRGB(21, 18, 45)
-	LoadingFrameGlow1.ImageTransparency = 1.000
-	LoadingFrameGlow1.ScaleType = Enum.ScaleType.Slice
-	LoadingFrameGlow1.SliceCenter = Rect.new(23, 23, 277, 277)
-
-	LoadingFrameGlow2.Name = "LoadingFrameGlow2"
-	LoadingFrameGlow2.Parent = LoadingGlow
-	LoadingFrameGlow2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-	LoadingFrameGlow2.BackgroundTransparency = 1.000
-	LoadingFrameGlow2.Position = UDim2.new(0, -15, 0, -15)
-	LoadingFrameGlow2.Size = UDim2.new(1, 30, 1, 30)
-	LoadingFrameGlow2.ZIndex = 0
-	LoadingFrameGlow2.Image = "rbxassetid://5554236805"
-	LoadingFrameGlow2.ImageColor3 = Color3.fromRGB(21, 18, 45)
-	LoadingFrameGlow2.ImageTransparency = 1.000
-	LoadingFrameGlow2.ScaleType = Enum.ScaleType.Slice
-	LoadingFrameGlow2.SliceCenter = Rect.new(23, 23, 277, 277)
-
-	SupportedFrame.Name = "SupportedFrame"
-	SupportedFrame.Parent = Loading
-	SupportedFrame.AnchorPoint = Vector2.new(0.5, 0.5)
-	SupportedFrame.BackgroundColor3 = Color3.fromRGB(21, 18, 45)
-	SupportedFrame.BackgroundTransparency = 1.000
-	SupportedFrame.Position = UDim2.new(0.338987992, 0, 0.507747352, 0)
-	SupportedFrame.Size = UDim2.new(0, 242, 0, 277)
-
-	SupportedCorner.CornerRadius = UDim.new(0, 4)
-	SupportedCorner.Name = "SupportedCorner"
-	SupportedCorner.Parent = SupportedFrame
-
-	BackgroundS.Name = "BackgroundS"
-	BackgroundS.Parent = SupportedFrame
-	BackgroundS.AnchorPoint = Vector2.new(0.5, 0.5)
-	BackgroundS.BackgroundColor3 = Color3.fromRGB(24, 21, 48)
-	BackgroundS.BackgroundTransparency = 1.000
-	BackgroundS.BorderSizePixel = 0
-	BackgroundS.Position = UDim2.new(0.499533653, 0, 0.575188577, 0)
-	BackgroundS.Size = UDim2.new(0, 233, 0, 226)
-
-	BackgroundSlist.Name = "BackgroundSlist"
-	BackgroundSlist.Parent = BackgroundS
-	BackgroundSlist.HorizontalAlignment = Enum.HorizontalAlignment.Center
-	BackgroundSlist.SortOrder = Enum.SortOrder.LayoutOrder
-	BackgroundSlist.Padding = UDim.new(0, 2)
-
-	BackgroundList1.Name = "BackgroundList1"
-	BackgroundList1.Parent = BackgroundS
-	BackgroundList1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	BackgroundList1.BackgroundTransparency = 1.000
-	BackgroundList1.Position = UDim2.new(0.0708154514, 0, 0, 0)
-	BackgroundList1.Size = UDim2.new(0, 200, 0, 18)
-	BackgroundList1.Font = Enum.Font.Gotham
-	BackgroundList1.Text = "Da Hood"
-	BackgroundList1.TextColor3 = Color3.fromRGB(255, 255, 255)
-	BackgroundList1.TextSize = 14.000
-	BackgroundList1.TextTransparency = 1.000
-
-	BackgroundList2.Name = "BackgroundList2"
-	BackgroundList2.Parent = BackgroundS
-	BackgroundList2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	BackgroundList2.BackgroundTransparency = 1.000
-	BackgroundList2.Position = UDim2.new(0.0708154514, 0, 0, 0)
-	BackgroundList2.Size = UDim2.new(0, 200, 0, 18)
-	BackgroundList2.Font = Enum.Font.Gotham
-	BackgroundList2.Text = "Hood Modded"
-	BackgroundList2.TextColor3 = Color3.fromRGB(255, 255, 255)
-	BackgroundList2.TextSize = 14.000
-	BackgroundList2.TextTransparency = 1.000
-
-	BackgroundList3.Name = "BackgroundList3"
-	BackgroundList3.Parent = BackgroundS
-	BackgroundList3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	BackgroundList3.BackgroundTransparency = 1.000
-	BackgroundList3.Position = UDim2.new(0.0708154514, 0, 0, 0)
-	BackgroundList3.Size = UDim2.new(0, 200, 0, 18)
-	BackgroundList3.Font = Enum.Font.Gotham
-	BackgroundList3.Text = "Tower Of Hell"
-	BackgroundList3.TextColor3 = Color3.fromRGB(255, 255, 255)
-	BackgroundList3.TextSize = 14.000
-	BackgroundList3.TextTransparency = 1.000
-
-	BackgroundList4.Name = "BackgroundList4"
-	BackgroundList4.Parent = BackgroundS
-	BackgroundList4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	BackgroundList4.BackgroundTransparency = 1.000
-	BackgroundList4.Position = UDim2.new(0.0708154514, 0, 0, 0)
-	BackgroundList4.Size = UDim2.new(0, 200, 0, 18)
-	BackgroundList4.Font = Enum.Font.Gotham
-	BackgroundList4.Text = "Strucid"
-	BackgroundList4.TextColor3 = Color3.fromRGB(255, 255, 255)
-	BackgroundList4.TextSize = 14.000
-	BackgroundList4.TextTransparency = 1.000
-
-	BackgroundList5.Name = "BackgroundList5"
-	BackgroundList5.Parent = BackgroundS
-	BackgroundList5.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	BackgroundList5.BackgroundTransparency = 1.000
-	BackgroundList5.Position = UDim2.new(0.0708154514, 0, 0, 0)
-	BackgroundList5.Size = UDim2.new(0, 200, 0, 18)
-	BackgroundList5.Font = Enum.Font.Gotham
-	BackgroundList5.Text = "Murder Mystery 2"
-	BackgroundList5.TextColor3 = Color3.fromRGB(255, 255, 255)
-	BackgroundList5.TextSize = 14.000
-	BackgroundList5.TextTransparency = 1.000
-
-	BackgroundList6.Name = "BackgroundList6"
-	BackgroundList6.Parent = BackgroundS
-	BackgroundList6.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	BackgroundList6.BackgroundTransparency = 1.000
-	BackgroundList6.Position = UDim2.new(0.0708154514, 0, 0, 0)
-	BackgroundList6.Size = UDim2.new(0, 200, 0, 18)
-	BackgroundList6.Font = Enum.Font.Gotham
-	BackgroundList6.Text = "Broken Bones IV"
-	BackgroundList6.TextColor3 = Color3.fromRGB(255, 255, 255)
-	BackgroundList6.TextSize = 14.000
-	BackgroundList6.TextTransparency = 1.000
-
-	BackgroundList7.Name = "BackgroundList7"
-	BackgroundList7.Parent = BackgroundS
-	BackgroundList7.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	BackgroundList7.BackgroundTransparency = 1.000
-	BackgroundList7.Position = UDim2.new(0.0708154514, 0, 0, 0)
-	BackgroundList7.Size = UDim2.new(0, 200, 0, 18)
-	BackgroundList7.Font = Enum.Font.Gotham
-	BackgroundList7.Text = "Meepcity"
-	BackgroundList7.TextColor3 = Color3.fromRGB(255, 255, 255)
-	BackgroundList7.TextSize = 14.000
-	BackgroundList7.TextTransparency = 1.000
-
-	BackgroundList8.Name = "BackgroundList8"
-	BackgroundList8.Parent = BackgroundS
-	BackgroundList8.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	BackgroundList8.BackgroundTransparency = 1.000
-	BackgroundList8.Position = UDim2.new(0.0708154514, 0, 0, 0)
-	BackgroundList8.Size = UDim2.new(0, 200, 0, 18)
-	BackgroundList8.Font = Enum.Font.Gotham
-	BackgroundList8.Text = "Clicker Madness"
-	BackgroundList8.TextColor3 = Color3.fromRGB(255, 255, 255)
-	BackgroundList8.TextSize = 14.000
-	BackgroundList8.TextTransparency = 1.000
-	
-	BackgroundList9.Name = "BackgroundList9"
-	BackgroundList9.Parent = BackgroundS
-	BackgroundList9.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	BackgroundList9.BackgroundTransparency = 1.000
-	BackgroundList9.Position = UDim2.new(0.0708154514, 0, 0, 0)
-	BackgroundList9.Size = UDim2.new(0, 200, 0, 18)
-	BackgroundList9.Font = Enum.Font.Gotham
-	BackgroundList9.Text = "Hellreaver"
-	BackgroundList9.TextColor3 = Color3.fromRGB(255, 255, 255)
-	BackgroundList9.TextSize = 14.000
-	BackgroundList9.TextTransparency = 1.000
-	
-	SupportedGlow.Name = "SupportedGlow"
-	SupportedGlow.Parent = SupportedFrame
-	SupportedGlow.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	SupportedGlow.BackgroundTransparency = 1.000
-	SupportedGlow.Size = UDim2.new(1, 0, 1, 0)
-	SupportedGlow.ZIndex = 0
-
-	SupportedFrameGlow1.Name = "SupportedFrameGlow1"
-	SupportedFrameGlow1.Parent = SupportedGlow
-	SupportedFrameGlow1.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-	SupportedFrameGlow1.BackgroundTransparency = 1.000
-	SupportedFrameGlow1.Position = UDim2.new(0, -15, 0, -15)
-	SupportedFrameGlow1.Size = UDim2.new(1, 30, 1, 30)
-	SupportedFrameGlow1.ZIndex = 0
-	SupportedFrameGlow1.Image = "rbxassetid://5554236805"
-	SupportedFrameGlow1.ImageColor3 = Color3.fromRGB(21, 18, 45)
-	SupportedFrameGlow1.ImageTransparency = 1.000
-	SupportedFrameGlow1.ScaleType = Enum.ScaleType.Slice
-	SupportedFrameGlow1.SliceCenter = Rect.new(23, 23, 277, 277)
-
-	SupportedFrameGlow2.Name = "SupportedFrameGlow2"
-	SupportedFrameGlow2.Parent = SupportedGlow
-	SupportedFrameGlow2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-	SupportedFrameGlow2.BackgroundTransparency = 1.000
-	SupportedFrameGlow2.Position = UDim2.new(0, -15, 0, -15)
-	SupportedFrameGlow2.Size = UDim2.new(1, 30, 1, 30)
-	SupportedFrameGlow2.ZIndex = 0
-	SupportedFrameGlow2.Image = "rbxassetid://5554236805"
-	SupportedFrameGlow2.ImageColor3 = Color3.fromRGB(21, 18, 45)
-	SupportedFrameGlow2.ImageTransparency = 1.000
-	SupportedFrameGlow2.ScaleType = Enum.ScaleType.Slice
-	SupportedFrameGlow2.SliceCenter = Rect.new(23, 23, 277, 277)
-
-	SupportedTitle.Name = "SupportedTitle"
-	SupportedTitle.Parent = SupportedFrame
-	SupportedTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	SupportedTitle.BackgroundTransparency = 1.000
-	SupportedTitle.Position = UDim2.new(-0.00230002776, 0, 0.0487365127, 0)
-	SupportedTitle.Size = UDim2.new(0, 237, 0, 34)
-	SupportedTitle.Font = Enum.Font.Gotham
-	SupportedTitle.Text = "Supported Games"
-	SupportedTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
-	SupportedTitle.TextSize = 19.000
-	SupportedTitle.TextTransparency = 1.000
-	
-	-- Scripts:
-
-	local function ANZEI_fake_script() -- LoadingFrame.LoadingFrameScript 
-		local script = Instance.new('LocalScript', LoadingFrame)
-
-		local TweenService = game:GetService("TweenService")
-
-		local LoadingFrame = script.Parent
-
-		local LoadingBlur = Instance.new('BlurEffect')
-		LoadingBlur.Size = 0
-		LoadingBlur.Enabled = true
-		LoadingBlur.Archivable = true
-		LoadingBlur.Name = "LoadingBlur"
-		LoadingBlur.Parent = game.Lighting
-
-		
-		
-		TweenService:Create(
-			SupportedFrame,
-			TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-			{BackgroundTransparency = 0}
-		):Play()
-		TweenService:Create(
-			BackgroundS,
-			TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-			{BackgroundTransparency = 0}
-		):Play()
-		TweenService:Create(
-			SupportedTitle,
-			TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-			{TextTransparency = 0}
-		):Play()
-		TweenService:Create(
-			SupportedFrameGlow1,
-			TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-			{ImageTransparency = 0}
-		):Play()
-		TweenService:Create(
-			SupportedFrameGlow2,
-			TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-			{ImageTransparency = 0}
-		):Play()
-		TweenService:Create(
-			BackgroundList1,
-			TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-			{TextTransparency = 0}
-		):Play()
-		TweenService:Create(
-			BackgroundList2,
-			TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-			{TextTransparency = 0}
-		):Play()
-		TweenService:Create(
-			BackgroundList3,
-			TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-			{TextTransparency = 0}
-		):Play()
-		TweenService:Create(
-			BackgroundList4,
-			TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-			{TextTransparency = 0}
-		):Play()
-		TweenService:Create(
-			BackgroundList5,
-			TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-			{TextTransparency = 0}
-		):Play()
-		TweenService:Create(
-			BackgroundList6,
-			TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-			{TextTransparency = 0}
-		):Play()
-		TweenService:Create(
-			BackgroundList7,
-			TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-			{TextTransparency = 0}
-		):Play()
-		TweenService:Create(
-			BackgroundList8,
-			TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-			{TextTransparency = 0}
-		):Play()
-		TweenService:Create(
-			BackgroundList9,
-			TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-			{TextTransparency = 0}
-		):Play()
-		
-		
-		
-		
-		
-		TweenService:Create(
-			LoadingBlur,
-			TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-			{Size = 100}
-		):Play()
-		TweenService:Create(
-			LoadingFrame,
-			TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-			{BackgroundTransparency = 0}
-		):Play()
-		TweenService:Create(
-			script.Parent.Background,
-			TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-			{BackgroundTransparency = 0}
-		):Play()
-		TweenService:Create(
-			script.Parent.LoadingFrameTitle,
-			TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-			{TextTransparency = 0}
-		):Play()
-		TweenService:Create(
-			script.Parent.Background.BackgroundTitle,
-			TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-			{TextTransparency = 0}
-		):Play()
-		TweenService:Create(
-			script.Parent.Background.BackgroundBtn.BackgroundBtnTitle,
-			TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-			{TextTransparency = 0}
-		):Play()
-		TweenService:Create(
-			script.Parent.LoadingGlow.LoadingFrameGlow1,
-			TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-			{ImageTransparency = 0}
-		):Play()
-		TweenService:Create(
-			script.Parent.LoadingGlow.LoadingFrameGlow2,
-			TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-			{ImageTransparency = 0}
-		):Play()
-		TweenService:Create(
-			script.Parent.Background.BackgroundBtn,
-			TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-			{BackgroundTransparency = 0}
-		):Play()
-
-		script.Parent.Background.BackgroundBtn.MouseButton1Click:Connect(function()
-			TweenService:Create(
-				SupportedFrameGlow1,
-				TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-				{ImageTransparency = 1}
-			):Play()
-			TweenService:Create(
-				SupportedFrameGlow2,
-				TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-				{ImageTransparency = 1}
-			):Play()
-			TweenService:Create(
-				SupportedFrame,
-				TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-				{BackgroundTransparency = 1}
-			):Play()
-			TweenService:Create(
-				BackgroundS,
-				TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-				{BackgroundTransparency = 1}
-			):Play()
-			TweenService:Create(
-				SupportedTitle,
-				TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-				{TextTransparency = 1}
-			):Play()
-			TweenService:Create(
-				BackgroundList1,
-				TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-				{TextTransparency = 1}
-			):Play()
-			TweenService:Create(
-				BackgroundList2,
-				TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-				{TextTransparency = 1}
-			):Play()
-			TweenService:Create(
-				BackgroundList3,
-				TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-				{TextTransparency = 1}
-			):Play()
-			TweenService:Create(
-				BackgroundList4,
-				TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-				{TextTransparency = 1}
-			):Play()
-			TweenService:Create(
-				BackgroundList5,
-				TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-				{TextTransparency = 1}
-			):Play()
-			TweenService:Create(
-				BackgroundList6,
-				TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-				{TextTransparency = 1}
-			):Play()
-			TweenService:Create(
-				BackgroundList7,
-				TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-				{TextTransparency = 1}
-			):Play()
-			TweenService:Create(
-				BackgroundList8,
-				TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-				{TextTransparency = 1}
-			):Play()
-			TweenService:Create(
-				BackgroundList9,
-				TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-				{TextTransparency = 1}
-			):Play()
-			TweenService:Create(
-				LoadingFrame,
-				TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-				{BackgroundTransparency = 1}
-			):Play()
-			TweenService:Create(
-				script.Parent.Background,
-				TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-				{BackgroundTransparency = 1}
-			):Play()
-			TweenService:Create(
-				script.Parent.LoadingFrameTitle,
-				TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-				{TextTransparency = 1}
-			):Play()
-			TweenService:Create(
-				script.Parent.Background.BackgroundBtn,
-				TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-				{BackgroundTransparency = 1}
-			):Play()
-			TweenService:Create(
-				script.Parent.Background.BackgroundTitle,
-				TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-				{TextTransparency = 1}
-			):Play()
-			TweenService:Create(
-				script.Parent.Background.BackgroundBtn.BackgroundBtnTitle,
-				TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-				{TextTransparency = 1}
-			):Play()
-			TweenService:Create(
-				script.Parent.LoadingGlow.LoadingFrameGlow1,
-				TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-				{ImageTransparency = 1}
-			):Play()
-			TweenService:Create(
-				script.Parent.LoadingGlow.LoadingFrameGlow2,
-				TweenInfo.new(.55, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-				{ImageTransparency = 1}
-			):Play()
-			wait(1)
-			TweenService:Create(
-				LoadingBlur,
-				TweenInfo.new(1, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-				{Size = 0}
-			):Play()
-			LoadingFrame.Visible = false
-			LeftFrame.Visible = true
-			AllPages.Visible = true
-			MainFrameGlow.Visible = true
-			TweenService:Create(
-				MainFrame,
-				TweenInfo.new(.3, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-				{BackgroundTransparency = 0}
-			):Play()
-			TweenService:Create(
-				Title,
-				TweenInfo.new(.3, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-				{TextTransparency = 0}
-			):Play()
-			wait(5)
-			LoadingBlur:Destroy()
-			LoadingFrame.Parent.Parent.Loading:Destroy()
-		end)
-
-		script.Parent.Background.BackgroundBtn.MouseButton1Down:Connect(function()
-			TweenService:Create(
-				script.Parent.Background.BackgroundBtn,
-				TweenInfo.new(.2, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-				{BackgroundColor3 = Color3.fromRGB(27, 96, 186)}
-			):Play()
-			wait(.2)
-			TweenService:Create(
-				script.Parent.Background.BackgroundBtn,
-				TweenInfo.new(.2, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-				{BackgroundColor3 = Color3.fromRGB(29, 26, 53)}
-			):Play()
-		end)
-	end
-	coroutine.wrap(ANZEI_fake_script)()
 
 	LeftFrameLine.Name = "LeftFrameLine"
 	LeftFrameLine.Parent = LeftFrame
@@ -682,23 +76,25 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 		function(io, p)
 			if io.KeyCode == CloseBind then
 				if uitoggled == false then
-					LeftFrame.Visible = false
-					AllPages.Visible = false
-					MainFrameGlow.Visible = false
-					TweenService:Create(
-						Title,
-						TweenInfo.new(.35, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-						{TextTransparency = 1}
-					):Play()
 					TweenService:Create(
 						MainFrame,
 						TweenInfo.new(.35, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-						{BackgroundTransparency = 1}
+						{Size = UDim2.new(0, 0, 0, 0)}
 					):Play()
 					TweenService:Create(
-						ShadowFrame,
+						MainFrameGlow,
+						TweenInfo.new(.32, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
+						{Size = UDim2.new(0, 0, 0, 0)}
+					):Play()
+					TweenService:Create(
+						MainFrameGlow1,
 						TweenInfo.new(.35, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-						{BackgroundTransparency = 1}
+						{ImageTransparency = 1}
+					):Play()
+					TweenService:Create(
+						MainFrameGlow2,
+						TweenInfo.new(.35, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
+						{ImageTransparency = 1}
 					):Play()
 					wait(.35)
 					ShadowFrame.Visible = false
@@ -726,19 +122,27 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 							{Rotation = 270}
 						):Play()
 					end
-					LeftFrame.Visible = true
-					AllPages.Visible = true
-					MainFrameGlow.Visible = true
 					TweenService:Create(
 						MainFrame,
 						TweenInfo.new(.35, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-						{BackgroundTransparency = 0}
+						{Size = UDim2.new(0, 448, 0, 331)}
 					):Play()
 					TweenService:Create(
-						Title,
+						MainFrameGlow,
 						TweenInfo.new(.35, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-						{TextTransparency = 0}
+						{Size = UDim2.new(0, 448, 0, 331)}
 					):Play()
+					TweenService:Create(
+						MainFrameGlow1,
+						TweenInfo.new(.35, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
+						{ImageTransparency = 0}
+					):Play()
+					TweenService:Create(
+						MainFrameGlow2,
+						TweenInfo.new(.35, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
+						{ImageTransparency = 0}
+					):Play()
+					MainFrameGlow.Visible = true
 					uitoggled = false
 				end
 			end
@@ -750,26 +154,23 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 	Library.IgnoreGuiInset = false
 
 	MainFrame.Name = "MainFrame"
-	MainFrame.Parent = Library
+	MainFrame.Parent = MainFrameGlow
 	MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
 	MainFrame.BackgroundColor3 = Color3.fromRGB(21, 18, 45)
 	MainFrame.BorderSizePixel = 0
 	MainFrame.Position = UDim2.new(0.5, 0,0.5, 0)
-	MainFrame.Size = UDim2.new(0, 448, 0, 331)
-	MainFrame.ClipsDescendants = false
-	MainFrame.BackgroundTransparency = 1
+	MainFrame.Size = UDim2.new(0, 0, 0, 0)
+	MainFrame.ClipsDescendants = true
+	MainFrame.BackgroundTransparency = 0
 	
-	local pagesFolder = Instance.new("Folder")
-
-	pagesFolder.Name = "pagesFolder"
-	pagesFolder.Parent = AllPages
-
 	MainFrameGlow.Name = "MainFrameGlow"
-	MainFrameGlow.Parent = MainFrame
-	MainFrameGlow.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	MainFrameGlow.Parent = Library
+	MainFrameGlow.AnchorPoint = Vector2.new(0.5, 0.5)
+	MainFrameGlow.BackgroundColor3 = Color3.fromRGB(21, 18, 45)
 	MainFrameGlow.BackgroundTransparency = 1.000
-	MainFrameGlow.Size = UDim2.new(1, 0,1, 0)
-	MainFrameGlow.Visible = false
+	MainFrameGlow.BorderSizePixel = 0
+	MainFrameGlow.Position = UDim2.new(0.5, 0, 0.5, 0)
+	MainFrameGlow.Size = UDim2.new(0, 0, 0, 0)
 
 	MainFrameGlow1.Name = "MainFrameGlow1"
 	MainFrameGlow1.Parent = MainFrameGlow
@@ -778,10 +179,11 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 	MainFrameGlow1.Position = UDim2.new(0, -15, 0, -15)
 	MainFrameGlow1.Size = UDim2.new(1, 30, 1, 30)
 	MainFrameGlow1.ZIndex = 0
-	MainFrameGlow1.Image = "rbxassetid://5554236805"
-	MainFrameGlow1.ImageColor3 = Color3.fromRGB(21, 18, 45)
+	MainFrameGlow1.Image = "rbxassetid://5028857084"
+	MainFrameGlow1.ImageColor3 = Color3.fromRGB(21, 20, 45)
 	MainFrameGlow1.ScaleType = Enum.ScaleType.Slice
-	MainFrameGlow1.SliceCenter = Rect.new(23, 23, 277, 277)
+	MainFrameGlow1.SliceCenter = Rect.new(24, 24, 276, 276)
+	MainFrameGlow1.ImageTransparency = 1
 
 	MainFrameGlow2.Name = "MainFrameGlow2"
 	MainFrameGlow2.Parent = MainFrameGlow
@@ -790,11 +192,38 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 	MainFrameGlow2.Position = UDim2.new(0, -15, 0, -15)
 	MainFrameGlow2.Size = UDim2.new(1, 30, 1, 30)
 	MainFrameGlow2.ZIndex = 0
-	MainFrameGlow2.Image = "rbxassetid://5554236805"
-	MainFrameGlow2.ImageColor3 = Color3.fromRGB(21, 19, 45)
+	MainFrameGlow2.Image = "rbxassetid://5028857084"
+	MainFrameGlow2.ImageColor3 = Color3.fromRGB(21, 20, 45)
 	MainFrameGlow2.ScaleType = Enum.ScaleType.Slice
-	MainFrameGlow2.SliceCenter = Rect.new(23, 23, 277, 277)
+	MainFrameGlow2.SliceCenter = Rect.new(24, 24, 276, 276)
+	MainFrameGlow2.ImageTransparency = 1
+	
+	TweenService:Create(
+		MainFrame,
+		TweenInfo.new(.35, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
+		{Size = UDim2.new(0, 448, 0, 331)}
+	):Play()
+	TweenService:Create(
+		MainFrameGlow,
+		TweenInfo.new(.35, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
+		{Size = UDim2.new(0, 448, 0, 331)}
+	):Play()
+	TweenService:Create(
+		MainFrameGlow1,
+		TweenInfo.new(.35, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
+		{ImageTransparency = 0}
+	):Play()
+	TweenService:Create(
+		MainFrameGlow2,
+		TweenInfo.new(.35, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
+		{ImageTransparency = 0}
+	):Play()
+	
+	local pagesFolder = Instance.new("Folder")
 
+	pagesFolder.Name = "pagesFolder"
+	pagesFolder.Parent = AllPages
+	
 	LeftFrame.Name = "LeftFrame"
 	LeftFrame.Parent = MainFrame
 	LeftFrame.BackgroundColor3 = Color3.fromRGB(31, 28, 54)
@@ -802,7 +231,7 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 	LeftFrame.ClipsDescendants = true
 	LeftFrame.Size = UDim2.new(0, 41, 0, 331)
 	LeftFrame.ZIndex = 3
-	LeftFrame.Visible = false
+	LeftFrame.Visible = true
 
 	LeftFrameBtn.Name = "LeftFrameBtn"
 	LeftFrameBtn.Parent = LeftFrame
@@ -961,7 +390,7 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 	Title.TextColor3 = Color3.fromRGB(255, 255, 255)
 	Title.TextSize = 19.000
 	Title.TextXAlignment = Enum.TextXAlignment.Left
-	Title.TextTransparency = 1
+	Title.TextTransparency = 0
 
 	ShadowFrame.Name = "ShadowFrame"
 	ShadowFrame.Parent = MainFrame
@@ -985,7 +414,7 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 	AllPages.Position = UDim2.new(0.123, 0,0.139, 0)
 	AllPages.Size = UDim2.new(0, 381, 0, 271)
 	AllPages.BackgroundTransparency = 0
-	AllPages.Visible = false
+	AllPages.Visible = true
 	
 	local tog3 = false
 
@@ -1092,8 +521,9 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 		end)
 	end
 	coroutine.wrap(YLNRBC_fake_script)()
-	local function OGJOWJ_fake_script() -- Frame.Draggable 
-		local script = Instance.new('LocalScript', MainFrame)
+	
+	local function NSSL_fake_script() -- MainFrameGlow.MainFrameGlowDrag 
+		local script = Instance.new('LocalScript', MainFrameGlow)
 
 		local UIS = game:GetService("UserInputService")
 		function dragify(Frame)
@@ -1105,7 +535,7 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 			function updateInput(input)
 				local Delta = input.Position - dragStart
 				local Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + Delta.X, startPos.Y.Scale, startPos.Y.Offset + Delta.Y)
-				game:GetService("TweenService"):Create(Frame, TweenInfo.new(.35), {Position = Position}):Play()
+				game:GetService("TweenService"):Create(Frame, TweenInfo.new(0.25), {Position = Position}):Play()
 			end
 			Frame.InputBegan:Connect(function(input)
 				if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) and UIS:GetFocusedTextBox() == nil then
@@ -1133,7 +563,7 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 
 		dragify(script.Parent)
 	end
-	coroutine.wrap(OGJOWJ_fake_script)()
+	coroutine.wrap(NSSL_fake_script)()
 
 	local Tabs = {}
 
@@ -1196,8 +626,9 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 				TweenInfo.new(.35, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
 				{Size = UDim2.new(0, 393,0, 263)}
 			):Play()
-			NewPages.ScrollBarThickness = 2
 			NewPages.Visible = true
+			wait(.35)
+			NewPages.ScrollBarThickness = 2
 		end)
 
 
@@ -1279,9 +710,16 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 			Button.TextSize = 14.000
 			Button.MouseButton1Click:Connect(function()
 				callback()
-			end)
-
-			Button.MouseButton1Down:Connect(function()
+				TweenService:Create(
+					ButtonTitle,
+					TweenInfo.new(.2, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
+					{TextSize = 12}
+				):Play()
+				TweenService:Create(
+					Button,
+					TweenInfo.new(.2, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
+					{Size = UDim2.new(0, 353, 0, 28)}
+				):Play()
 				TweenService:Create(
 					Button,
 					TweenInfo.new(.2, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
@@ -1289,9 +727,19 @@ function WindowTable:Window(Htitle,GMtitle,toclose)
 				):Play()
 				wait(.2)
 				TweenService:Create(
+					ButtonTitle,
+					TweenInfo.new(.2, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
+					{TextSize = 14}
+				):Play()
+				TweenService:Create(
 					Button,
 					TweenInfo.new(.2, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
 					{BackgroundColor3 = Color3.fromRGB(29, 26, 53)}
+				):Play()
+				TweenService:Create(
+					Button,
+					TweenInfo.new(.2, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
+					{Size = UDim2.new(0, 375, 0, 32)}
 				):Play()
 			end)
 			
